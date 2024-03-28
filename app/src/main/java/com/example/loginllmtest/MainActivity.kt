@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.ufc.great.llm.screens.*
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,32 +34,32 @@ import androidx.compose.ui.Alignment
 class MainActivity : ComponentActivity() {
     // Lista de pares contendo o nome do item e a classe da Activity correspondente
     private val itemsList = listOf(
-        "Padrão 1" to Tela_Login1::class.java,
-        "Padrão 2" to Tela_Login2::class.java,
-        "Padrão 3" to Tela_Login3::class.java,
+        "Padrão 1" to Tela_1::class.java,
+        "Padrão 2" to Tela_2::class.java,
+        "Padrão 3" to Tela_3::class.java,
 
         //Telas com pedido de acessibilidade
-        "Padrão 1 Acessível" to Tela_Login_Access_1::class.java,
-        "Padrão 2 Acessível" to Tela_Login_Access_2::class.java,
-        "Padrão 3 Acessível" to Tela_Login_Access_3::class.java,
+        "Padrão 1 Acessível" to Tela_Access_1::class.java,
+        "Padrão 2 Acessível" to Tela_Access_2::class.java,
+        "Padrão 3 Acessível" to Tela_Access_3::class.java,
 
         //Telas com pedido para Constraint Layout
-        "Constraint_Layout 1 " to Tela_Login_CL_1::class.java,
-        "Constraint_Layout 2 " to Tela_Login_CL_2::class.java,
-        "Constraint_Layout 3 " to Tela_Login_CL_3::class.java,
+        "Constraint_Layout 1 " to Tela_CL_1::class.java,
+        "Constraint_Layout 2 " to Tela_CL_2::class.java,
+        "Constraint_Layout 3 " to Tela_CL_3::class.java,
 
-        "Constraint_Layout 1 Acessível " to Tela_Login_CL_Access_1::class.java,
-        "Constraint_Layout 2 Acessível " to Tela_Login_CL_Access_2::class.java,
-        "Constraint_Layout 3 Acessível" to Tela_Login_CL_Access_3::class.java,
+        "Constraint_Layout 1 Acessível " to Tela_CL_Access_1::class.java,
+        "Constraint_Layout 2 Acessível " to Tela_CL_Access_2::class.java,
+        "Constraint_Layout 3 Acessível" to Tela_CL_Access_3::class.java,
 
         //Telas com pedido para Compose
-        "Compose 1 " to Tela_Login_Compose_1::class.java,
-        "Compose 2 " to Tela_Login_Compose_2::class.java,
-        "Compose 2 " to Tela_Login_Compose_3::class.java,
+        "Compose 1 " to Tela_Compose_1::class.java,
+        "Compose 2 " to Tela_Compose_2::class.java,
+        "Compose 3 " to Tela_Compose_3::class.java,
 
-        "Compose 1 Acessível" to Tela_Login_Compose_Access_1::class.java,
-        "Compose 2 Acessível" to Tela_Login_Compose_Access_2::class.java,
-        "Compose 2 Acessível" to Tela_Login_Compose_Access_3::class.java
+        "Compose 1 Acessível" to Tela_Compose_Access_1::class.java,
+        "Compose 2 Acessível" to Tela_Compose_Access_2::class.java,
+        "Compose 3 Acessível" to Tela_Compose_Access_3::class.java
 
     )
 

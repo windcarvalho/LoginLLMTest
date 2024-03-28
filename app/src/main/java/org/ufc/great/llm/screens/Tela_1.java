@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.loginllmtest.R;
 
-public class Tela_Login1 extends AppCompatActivity {
+public class Tela_1 extends AppCompatActivity {
 
     private EditText editTextUsername, editTextPassword;
     private Button buttonLogin;
@@ -21,7 +21,7 @@ public class Tela_Login1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_login1);
+        setContentView(R.layout.activity_tela_1);
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -38,7 +38,7 @@ public class Tela_Login1 extends AppCompatActivity {
                 // Por exemplo, você pode validar as credenciais com um serviço de autenticação
 
                 // Exemplo de mensagem de login bem-sucedida
-                Toast.makeText(Tela_Login1.this, "Login bem-sucedido para " + username, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Tela_1.this, "Login bem-sucedido para " + username, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -46,7 +46,7 @@ public class Tela_Login1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Implemente a lógica para lidar com a recuperação de senha aqui
-                Toast.makeText(Tela_Login1.this, "Recuperação de senha", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Tela_1.this, "Recuperação de senha", Toast.LENGTH_SHORT).show();
             }
         });
     }

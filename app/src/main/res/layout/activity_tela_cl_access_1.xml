@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ufc.great.llm.screens.Tela_Login_CL_Access_1">
+    tools:context="org.ufc.great.llm.screens.Tela_CL_Access_1">
 
     <!-- Rótulo descritivo para o campo de entrada de nome de usuário/e-mail -->
     <TextView

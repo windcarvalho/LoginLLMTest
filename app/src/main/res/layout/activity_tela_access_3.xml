@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Usuário/E-mail"
+        android:inputType="textEmailAddress"
+        android:contentDescription="Campo de entrada para usuário ou e-mail"
+        android:labelFor="@id/editTextUsername"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:contentDescription="Campo de entrada para senha"
+        android:labelFor="@id/editTextPassword"
+        android:layout_below="@id/editTextUsername"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Entrar"
+        android:contentDescription="Botão para entrar na conta"
+        android:layout_below="@id/editTextPassword"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Esqueceu a senha?"
+        android:contentDescription="Opção para recuperar a senha"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_below="@id/buttonLogin"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>
