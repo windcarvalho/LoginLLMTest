@@ -1,8 +1,10 @@
 package org.ufc.great.llm.screens
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -11,95 +13,108 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.loginllmtest.R
 
 class Tela_Compose_3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginScreen(
-                onLoginClick = {
-                    // Adicione a lógica para verificar as credenciais do usuário
-                },
-                onForgotPasswordClick = {
-                    // Adicione a lógica para lidar com o clique em "Esqueceu a senha?"
-                }
+            ProductDetailScreen("Nome do produto","Descrição do produto","99,99", R.drawable.ic_launcher_background,/*""*/
             )
         }
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
     @Composable
-    fun LoginScreen(onLoginClick: () -> Unit, onForgotPasswordClick: () -> Unit) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        val context = LocalContext.current
-        val keyboardController = LocalSoftwareKeyboardController.current
-
-        Surface(
-            // color = MaterialTheme.colors.background,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                OutlinedTextField(
-                    value = username,
-                    onValueChange = { username = it },
-                    label = { Text("Username or Email") },
-                    singleLine = true,
+    fun ProductDetailScreen(
+        productName: String,
+        productDescription: String,
+        productPrice: String,
+        productImageRes: Int,
+    ) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = productName) },
+                )
+            },
+            content = {
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        imeAction = ImeAction.Next
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onNext = { /* Handle next action */ }
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = productImageRes),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        contentScale = ContentScale.Fit
                     )
-                )
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text("Password") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        imeAction = ImeAction.Done
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            keyboardController?.hide() // Hide the keyboard when done
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = productDescription,
+                        style = MaterialTheme.typography.displayMedium
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = "Preço: $productPrice",
+                        style = MaterialTheme.typography.displayMedium,
+                        color = Color.Black
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Button(onClick = {  }) {
+                            Text("Adicionar ao Carrinho")
                         }
-                    )
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { onLoginClick }) {
-                    Text("Login")
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                TextButton(onClick = onForgotPasswordClick) {
-                    Text("Forgot Password?")
+
+                        Spacer(modifier = Modifier.width(16.dp))
+
+                        Button(onClick = {  }) {
+                            Text("Favoritos")
+                        }
+                    }
                 }
             }
-        }
+        )
     }
 
     @Preview(showBackground = true)
     @Composable
-    fun PreviewLoginScreen() {
-        LoginScreen(onLoginClick = { /* Preview action */ }, onForgotPasswordClick = { /* Preview action */ })
+    fun PreviewProductDetailScreen() {
+        ProductDetailScreen(
+            productName = "Nome do Produto",
+            productDescription = "Descrição do Produto",
+            productPrice = "$9.99",
+            productImageRes = R.drawable.ic_launcher_background,
+        )
     }
 }

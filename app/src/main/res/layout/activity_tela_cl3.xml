@@ -4,44 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ufc.great.llm.screens.Tela_CL_3">
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editTextUsername"
+    <ImageView
+        android:id="@+id/imageViewProduct"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Nome de usuário ou e-mail"
-        android:inputType="textEmailAddress"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextUsername" />
-
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        app:layout_constraintEnd_toEndOf="@id/editTextPassword"
-        app:layout_constraintStart_toStartOf="@id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/textViewForgotPassword"
+        android:id="@+id/textViewProductName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nome do Produto"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/imageViewProduct"
+        app:layout_constraintStart_toStartOf="@id/imageViewProduct"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProduct" />
+
+    <TextView
+        android:id="@+id/textViewProductDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Descrição do Produto"
+        app:layout_constraintEnd_toEndOf="@id/textViewProductName"
+        app:layout_constraintStart_toStartOf="@id/textViewProductName"
+        app:layout_constraintTop_toBottomOf="@id/textViewProductName" />
+
+    <TextView
+        android:id="@+id/textViewProductPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Preço do Produto"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/textViewProductDescription"
+        app:layout_constraintStart_toStartOf="@id/textViewProductDescription"
+        app:layout_constraintTop_toBottomOf="@id/textViewProductDescription" />
+
+    <Button
+        android:id="@+id/buttonAddToCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        app:layout_constraintEnd_toEndOf="@id/buttonLogin"
-        app:layout_constraintStart_toStartOf="@id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+        android:text="Adicionar ao Carrinho"
+        app:layout_constraintEnd_toEndOf="@id/textViewProductPrice"
+        app:layout_constraintStart_toStartOf="@id/textViewProductPrice"
+        app:layout_constraintTop_toBottomOf="@id/textViewProductPrice" />
+
+    <Button
+        android:id="@+id/buttonAddToFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar aos Favoritos"
+        app:layout_constraintEnd_toEndOf="@id/buttonAddToCart"
+        app:layout_constraintStart_toStartOf="@id/buttonAddToCart"
+        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

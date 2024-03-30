@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
              // Título
                 Column {
                     Text(
-                        text = "Telas de LOGIN com ChatGPT 3.5",
+                        text = "Telas de PRODUTO com ChatGPT 3.5",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.ExtraBold,
                         color = Color.White,

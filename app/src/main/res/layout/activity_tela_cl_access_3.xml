@@ -4,66 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ufc.great.llm.screens.Tela_CL_Access_3">
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewUsernameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome de usuário ou e-mail"
-        android:importantForAccessibility="yes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextUsername"
+    <ImageView
+        android:id="@+id/imageViewProduct"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Digite seu nome de usuário ou e-mail"
-        android:importantForAccessibility="yes"
-        android:inputType="textEmailAddress"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/product_image_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewUsernameLabel" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/textViewPasswordLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senha"
-        android:importantForAccessibility="yes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextUsername" />
-
-    <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/textViewProductName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Digite sua senha"
+        android:text="@string/product_name"
+        android:textSize="18sp"
         android:importantForAccessibility="yes"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPasswordLabel" />
+        app:layout_constraintEnd_toEndOf="@id/imageViewProduct"
+        app:layout_constraintStart_toStartOf="@id/imageViewProduct"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProduct" />
+
+    <TextView
+        android:id="@+id/textViewProductDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/product_description"
+        android:importantForAccessibility="yes"
+        app:layout_constraintEnd_toEndOf="@id/textViewProductName"
+        app:layout_constraintStart_toStartOf="@id/textViewProductName"
+        app:layout_constraintTop_toBottomOf="@id/textViewProductName" />
+
+    <TextView
+        android:id="@+id/textViewProductPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/product_price"
+        android:textSize="18sp"
+        android:importantForAccessibility="yes"
+        app:layout_constraintEnd_toEndOf="@id/textViewProductDescription"
+        app:layout_constraintStart_toStartOf="@id/textViewProductDescription"
+        app:layout_constraintTop_toBottomOf="@id/textViewProductDescription" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonAddToCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar"
+        android:text="@string/add_to_cart"
         android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="@id/editTextPassword"
-        app:layout_constraintStart_toStartOf="@id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+        app:layout_constraintEnd_toEndOf="@id/textViewProductPrice"
+        app:layout_constraintStart_toStartOf="@id/textViewProductPrice"
+        app:layout_constraintTop_toBottomOf="@id/textViewProductPrice" />
 
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+    <Button
+        android:id="@+id/buttonAddToFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
+        android:text="@string/add_to_favorites"
         android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="@id/buttonLogin"
-        app:layout_constraintStart_toStartOf="@id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+        app:layout_constraintEnd_toEndOf="@id/buttonAddToCart"
+        app:layout_constraintStart_toStartOf="@id/buttonAddToCart"
+        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,53 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/product_image_description" />
 
     <TextView
+        android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome de usuário ou E-mail"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite seu nome de usuário ou e-mail"
-        android:inputType="textEmailAddress" />
+        android:text="@string/product_name"
+        android:textSize="24sp"
+        android:padding="16dp"/>
 
     <TextView
+        android:id="@+id/productDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Senha"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:text="@string/product_description"
+        android:textSize="16sp"
+        android:padding="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/productPrice"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Digite sua senha"
-        android:inputType="textPassword" />
+        android:text="@string/product_price"
+        android:textSize="20sp"
+        android:padding="16dp"/>
 
     <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:onClick="login"
-        android:background="?android:attr/selectableItemBackground"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/design_default_color_primary" />
-
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+        android:id="@+id/addToCartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/add_to_cart"
         android:layout_marginTop="16dp"
-        android:text="Esqueceu a senha? Clique aqui para recuperá-la."
-        android:textColor="@color/design_default_color_primary"
-        android:textStyle="bold" />
+        android:layout_gravity="center_horizontal"
+        android:importantForAccessibility="yes"/>
+
+    <Button
+        android:id="@+id/addToFavoritesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_favorites"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:importantForAccessibility="yes"/>
+
 </LinearLayout>

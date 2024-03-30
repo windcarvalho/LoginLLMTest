@@ -1,48 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editTextUsername"
+    <ImageView
+        android:id="@+id/image_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Usuário/E-mail"
-        android:inputType="textEmailAddress"
-        android:contentDescription="Campo de entrada para usuário ou e-mail"
-        android:labelFor="@id/editTextUsername"
-        android:layout_marginBottom="8dp"/>
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        android:contentDescription="Campo de entrada para senha"
-        android:labelFor="@id/editTextPassword"
-        android:layout_below="@id/editTextUsername"
-        android:layout_marginBottom="8dp"/>
-
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:contentDescription="Botão para entrar na conta"
-        android:layout_below="@id/editTextPassword"
-        android:layout_marginBottom="8dp"/>
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/product_image_description" />
 
     <TextView
-        android:id="@+id/textViewForgotPassword"
-        android:layout_width="wrap_content"
+        android:id="@+id/text_product_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:contentDescription="Opção para recuperar a senha"
-        android:clickable="true"
+        android:text="@string/product_name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingTop="16dp"
         android:focusable="true"
-        android:layout_below="@id/buttonLogin"
-        android:layout_alignParentEnd="true"/>
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="yes"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/text_product_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_description"
+        android:paddingTop="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="yes"/>
+
+    <TextView
+        android:id="@+id/text_product_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_price"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="yes"/>
+
+    <Button
+        android:id="@+id/button_add_to_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_cart"
+        android:focusable="true"
+        android:importantForAccessibility="yes"/>
+
+    <Button
+        android:id="@+id/button_add_to_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_favorites"
+        android:layout_marginTop="8dp"
+        android:focusable="true"
+        android:importantForAccessibility="yes"/>
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package org.ufc.great.llm.screens
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,85 +17,86 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.loginllmtest.R
 
 class Tela_Compose_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginScreen(
-                onLoginClick = {
-                    // Adicione a lógica para verificar as credenciais do usuário
-                },
-                onForgotPasswordClick = {
-                    // Adicione a lógica para lidar com o clique em "Esqueceu a senha?"
-                }
+            ProductDetailsScreen(
+
             )
         }
     }
-
-    @OptIn(ExperimentalComposeUiApi::class)
     @Composable
-    fun LoginScreen(onLoginClick: () -> Unit, onForgotPasswordClick: () -> Unit) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        val focusRequester = remember { FocusRequester() }
-        val keyboardController = LocalSoftwareKeyboardController.current
-        val context = LocalContext.current
-
+    fun ProductDetailsScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Username or Email") },
+            // Product Image
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_background),
+                contentDescription = "Product Image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                keyboardActions = KeyboardActions(onNext = { focusRequester.requestFocus() })
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
             )
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
-                    .focusRequester(focusRequester),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() })
+
+            // Product Name
+            Text(
+                text = "Product Name",
+                fontSize = 24.sp,
+                color = Color.Black
             )
+
+            // Product Description
+            Text(
+                text = "Product Description",
+                fontSize = 16.sp,
+                color = Color.Gray
+            )
+
+            // Product Price
+            Text(
+                text = "$99.99",
+                fontSize = 20.sp,
+                color = Color.Black
+            )
+
+            // Add to Cart Button
             Button(
-                onClick = { onLoginClick },
-                modifier = Modifier.fillMaxWidth()
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp)
             ) {
-                Text("Login")
+                Text(text = "Add to Cart")
             }
-            TextButton(
-                onClick = { onForgotPasswordClick() },
-                modifier = Modifier.padding(top = 16.dp)
+
+            // Add to Favorites Button
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp)
             ) {
-                Text("Forgot Password?")
+                Text(text = "Add to Favorites")
             }
         }
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun PreviewLoginScreen() {
-        LoginScreen(onLoginClick = { /* TODO */ }, onForgotPasswordClick = { /* TODO */ })
     }
 }
 

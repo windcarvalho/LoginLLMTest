@@ -3,6 +3,7 @@ package org.ufc.great.llm.screens
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -16,89 +17,113 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.sp
+import com.example.loginllmtest.R
 
 class Tela_Compose_Access_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginScreen(
-                onLoginClick = {
-                    // Adicione a lógica para verificar as credenciais do usuário
-                },
-                onForgotPasswordClick = {
-                    // Adicione a lógica para lidar com o clique em "Esqueceu a senha?"
+            ProductDetailsScreen(
+            )
+        }
+    }
+
+    @Composable
+    fun ProductDetailsScreen() {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Product Image
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_background),
+                contentDescription = "Visualização do produto: Nome do Produto",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
+            )
+
+            // Product Name
+            Text(
+                text = "Product Name",
+                fontSize = 24.sp,
+                color = Color.Black,
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "Nome do Produto"
+                    }
+            )
+
+            // Product Description
+            Text(
+                text = "Product Description",
+                fontSize = 16.sp,
+                color = Color.Gray,
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "Descrição do Produto"
+                    }
+            )
+
+            // Product Price
+            Text(
+                text = "$99.99",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "Preço: $99.99"
+                    }
+            )
+
+            // Add to Cart Button
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp),
+                content = {
+                    Text(
+                        text = "Adicionar ao Carrinho",
+                        modifier = Modifier
+                            .semantics {
+                                contentDescription = "Adicionar ao Carrinho"
+                            }
+                    )
+                }
+            )
+
+            // Add to Favorites Button
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp),
+                content = {
+                    Text(
+                        text = "Adicionar aos Favoritos",
+                        modifier = Modifier
+                            .semantics {
+                                contentDescription = "Adicionar aos Favoritos"
+                            }
+                    )
                 }
             )
         }
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
-    @Composable
-    fun LoginScreen(
-        onLoginClick: () -> Unit,
-        onForgotPasswordClick: () -> Unit
-    ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        val context = LocalContext.current
-        val keyboardController = LocalSoftwareKeyboardController.current
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Username or Email *") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                keyboardActions = KeyboardActions(onNext = { /* Focus on password field */ })
-            )
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password *") },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(onDone = { onLoginClick })
-            )
-            Button(
-                onClick = { onLoginClick },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
-            ) {
-                Text("Login")
-            }
-            TextButton(
-                onClick = { onForgotPasswordClick },
-                modifier = Modifier.padding(top = 16.dp)
-            ) {
-                Text("Forgot Password?")
-            }
-        }
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun PreviewLoginScreen() {
-        LoginScreen(
-            onLoginClick = { /* TODO */ },
-            onForgotPasswordClick = { /* TODO */ }
-        )
-    }
 
 }

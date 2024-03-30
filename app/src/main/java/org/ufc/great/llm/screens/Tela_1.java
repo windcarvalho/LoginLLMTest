@@ -23,31 +23,5 @@ public class Tela_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_1);
 
-        editTextUsername = findViewById(R.id.editTextUsername);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        buttonLogin = findViewById(R.id.buttonLogin);
-        textViewForgotPassword = findViewById(R.id.textViewForgotPassword);
-
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = editTextUsername.getText().toString();
-                String password = editTextPassword.getText().toString();
-
-                // Implemente a lógica de autenticação aqui
-                // Por exemplo, você pode validar as credenciais com um serviço de autenticação
-
-                // Exemplo de mensagem de login bem-sucedida
-                Toast.makeText(Tela_1.this, "Login bem-sucedido para " + username, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Implemente a lógica para lidar com a recuperação de senha aqui
-                Toast.makeText(Tela_1.this, "Recuperação de senha", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

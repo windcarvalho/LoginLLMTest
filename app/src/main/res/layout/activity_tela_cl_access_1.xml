@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.ufc.great.llm.screens.Tela_CL_Access_1">
 
-    <!-- Rótulo descritivo para o campo de entrada de nome de usuário/e-mail -->
-    <TextView
-        android:id="@+id/textViewUsernameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome de usuário ou e-mail"
-        android:labelFor="@+id/editTextUsername"
+    <!-- Imagem do Produto -->
+    <ImageView
+        android:id="@+id/imageViewProduto"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/descricao_imagem_produto"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Campo de entrada para o nome de usuário/e-mail -->
-    <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:importantForAccessibility="yes"
-        android:hint="Digite seu nome de usuário ou e-mail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUsernameLabel" />
-
-    <!-- Rótulo descritivo para o campo de entrada de senha -->
+    <!-- Nome do Produto -->
     <TextView
-        android:id="@+id/textViewPasswordLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senha"
-        android:labelFor="@+id/editTextPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
-
-    <!-- Campo de entrada para a senha -->
-    <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/textViewNomeProduto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:importantForAccessibility="yes"
-        android:hint="Digite sua senha"
+        android:text="@string/nome_produto_exemplo"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordLabel" />
+        app:layout_constraintTop_toBottomOf="@id/imageViewProduto" />
 
-    <!-- Botão de login -->
+    <!-- Preço do Produto -->
+    <TextView
+        android:id="@+id/textViewPrecoProduto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/preco_produto_exemplo"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewNomeProduto" />
+
+    <!-- Descrição do Produto -->
+    <TextView
+        android:id="@+id/textViewDescricaoProduto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/descricao_produto_exemplo"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPrecoProduto" />
+
+    <!-- Botão Adicionar ao Carrinho -->
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonAdicionarCarrinho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:importantForAccessibility="yes"
+        android:text="@string/botao_adicionar_carrinho"
+        android:contentDescription="@string/descricao_botao_adicionar_carrinho"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@id/textViewDescricaoProduto" />
 
-    <!-- Link para recuperar senha -->
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+    <!-- Botão Adicionar aos Favoritos -->
+    <Button
+        android:id="@+id/buttonAdicionarFavoritos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:clickable="true"
-        android:onClick="forgotPasswordClicked"
-        android:importantForAccessibility="yes"
+        android:text="@string/botao_adicionar_favoritos"
+        android:contentDescription="@string/descricao_botao_adicionar_favoritos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+        app:layout_constraintTop_toBottomOf="@id/buttonAdicionarCarrinho" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
