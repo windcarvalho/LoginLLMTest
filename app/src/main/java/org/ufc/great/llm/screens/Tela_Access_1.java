@@ -1,14 +1,11 @@
 package org.ufc.great.llm.screens;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.loginllmtest.R;
+import com.example.produtollmtest.R;
 
 public class Tela_Access_1 extends AppCompatActivity {
     private EditText editTextUsername, editTextPassword;

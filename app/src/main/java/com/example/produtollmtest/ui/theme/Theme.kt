@@ -1,4 +1,4 @@
-package com.example.loginllmtest.ui.theme
+package com.example.produtollmtest.ui.theme
 
 import android.app.Activity
 import android.os.Build
