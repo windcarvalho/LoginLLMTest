@@ -101,7 +101,7 @@
         <activity
             android:name="org.ufc.great.llm.screens.Tela_1"
             android:exported="false"
-            android:label="@string/title_activity_tela_login1"
+            android:label="@string/title_activity_tela_perfil"
             android:theme="@style/Theme.LoginLLMTest" >
         </activity>
         <activity
