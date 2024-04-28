@@ -1,40 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/profileImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginTop="24dp"
+        android:layout_centerHorizontal="true"/>
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/firstNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Usuário/E-mail"
+        android:hint="Nome"
+        android:layout_below="@id/profileImageView"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/lastNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sobrenome"
+        android:layout_below="@id/firstNameEditText"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
         android:inputType="textEmailAddress"
-        android:layout_marginBottom="8dp"/>
+        android:layout_below="@id/lastNameEditText"
+        android:layout_margin="16dp"/>
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/phoneEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        android:layout_below="@id/editTextUsername"
-        android:layout_marginBottom="8dp"/>
+        android:hint="Telefone"
+        android:inputType="phone"
+        android:layout_below="@id/emailEditText"
+        android:layout_margin="16dp"/>
 
     <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:layout_below="@id/editTextPassword"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+        android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:layout_below="@id/buttonLogin"
+        android:text="Editar"
+        android:layout_below="@id/phoneEditText"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:layout_below="@id/phoneEditText"
+        android:layout_marginTop="24dp"
         android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

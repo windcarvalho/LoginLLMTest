@@ -1,56 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context="org.ufc.great.llm.screens.Tela_CL_2">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Nome de usuário ou e-mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="32dp"
-        />
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextUsername"
-        android:layout_marginTop="16dp"
-        />
-
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword"
-        android:layout_marginTop="32dp"
-        />
-
+    <!-- Título da tela -->
     <TextView
-        android:id="@+id/textViewForgotPassword"
+        android:id="@+id/textViewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        app:layout_constraintEnd_toEndOf="@id/buttonLogin"
-        app:layout_constraintStart_toStartOf="@id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+        android:text="@string/profile"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:layout_marginTop="16dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Foto de Perfil -->
+    <ImageView
+        android:id="@+id/imageViewProfilePicture"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/profile_picture"
+        android:src="@drawable/ic_launcher_background"
+        android:importantForAccessibility="yes"
+        app:layout_constraintTop_toBottomOf="@id/textViewProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Botão para Alterar Foto -->
+    <Button
+        android:id="@+id/buttonChangePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_picture"
+        android:importantForAccessibility="yes"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProfilePicture"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Campo de Nome -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutFirstName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/first_name"
+        app:layout_constraintStart_toEndOf="@id/imageViewProfilePicture"
+        app:layout_constraintTop_toTopOf="@id/imageViewProfilePicture"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:importantForAccessibility="yes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:importantForAccessibility="yes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de Sobrenome -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutLastName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/last_name"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutFirstName"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutFirstName"
+        android:layout_marginTop="8dp"
+        android:importantForAccessibility="yes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:importantForAccessibility="yes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de E-mail -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutLastName"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutLastName"
+        android:layout_marginTop="8dp"
+        android:importantForAccessibility="yes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:importantForAccessibility="yes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de Telefone -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPhone"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail"
+        android:layout_marginTop="8dp"
+        android:importantForAccessibility="yes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:importantForAccessibility="yes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Botão para Editar Perfil -->
+    <Button
+        android:id="@+id/buttonEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_profile"
+        android:importantForAccessibility="yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageViewProfilePicture"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Botão para Salvar Alterações -->
+    <Button
+        android:id="@+id/buttonSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_changes"
+        android:importantForAccessibility="yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPhone"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

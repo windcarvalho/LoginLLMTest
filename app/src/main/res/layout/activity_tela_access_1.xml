@@ -1,54 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <TextView
+    <!-- Foto de perfil -->
+    <ImageView
+        android:id="@+id/image_profile"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/profile_image_description"/>
+
+    <!-- Botão de alterar foto de perfil -->
+    <Button
+        android:id="@+id/btn_change_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome de usuário ou E-mail"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:layout_below="@id/image_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/change_photo"/>
 
+    <!-- Campos de informações pessoais -->
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Digite seu nome de usuário ou e-mail"
-        android:inputType="textEmailAddress" />
+        android:layout_below="@id/btn_change_photo"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/first_name"
+        android:labelFor="@id/editTextFirstName"
+        android:contentDescription="@string/edit_text_first_name"/>
 
-    <TextView
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextFirstName"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/last_name"
+        android:labelFor="@id/editTextLastName"
+        android:contentDescription="@string/edit_text_last_name"/>
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextLastName"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"
+        android:labelFor="@id/editTextEmail"
+        android:contentDescription="@string/edit_text_email"/>
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextEmail"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:inputType="phone"
+        android:hint="@string/phone"
+        android:labelFor="@id/editTextPhone"
+        android:contentDescription="@string/edit_text_phone"/>
+
+    <!-- Botões de ação -->
+    <Button
+        android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Senha"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite sua senha"
-        android:inputType="textPassword" />
+        android:layout_below="@id/editTextPhone"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:text="@string/edit"/>
 
     <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:onClick="login"
-        android:background="?android:attr/selectableItemBackground"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/design_default_color_primary" />
-
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+        android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Esqueceu a senha? Clique aqui para recuperá-la."
-        android:textColor="@color/design_default_color_primary"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:layout_below="@id/editTextPhone"
+        android:layout_marginTop="24dp"
+        android:layout_toStartOf="@id/btn_edit"
+        android:text="@string/save"/>
+
+</RelativeLayout>

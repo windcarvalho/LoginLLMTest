@@ -6,42 +6,74 @@
     android:layout_height="match_parent"
     tools:context="org.ufc.great.llm.screens.Tela_CL_3">
 
-    <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Nome de usuário ou e-mail"
-        android:inputType="textEmailAddress"
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toTopOf="@+id/editProfileButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/firstNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword"
+        android:hint="Nome"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+        app:layout_constraintStart_toStartOf="@+id/lastNameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+    <EditText
+        android:id="@+id/lastNameEditText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Sobrenome"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/firstNameEditText" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+        app:layout_constraintStart_toStartOf="@+id/lastNameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameEditText" />
+
+    <EditText
+        android:id="@+id/phoneEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Telefone"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText"
+        app:layout_constraintStart_toStartOf="@+id/emailEditText"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        app:layout_constraintEnd_toEndOf="@id/editTextPassword"
-        app:layout_constraintStart_toStartOf="@id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+        android:text="Editar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+    <Button
+        android:id="@+id/saveProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        app:layout_constraintEnd_toEndOf="@id/buttonLogin"
-        app:layout_constraintStart_toStartOf="@id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+        android:text="Salvar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,52 +1,89 @@
-<!-- login_activity.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
+    <!-- Foto de perfil -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/profile_image_description"
+        android:importantForAccessibility="yes"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Botão para selecionar nova foto de perfil -->
+    <Button
+        android:id="@+id/change_photo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome de usuário ou e-mail"
-        android:labelFor="@id/editTextUsername"/>
+        android:text="@string/change_photo"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/change_photo_button_description"
+        android:importantForAccessibility="yes"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Campos de informações pessoais -->
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/first_name_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome de usuário ou e-mail"
+        android:hint="@string/first_name_hint"
+        android:inputType="text"
+        android:importantForAccessibility="yes"/>
+
+    <EditText
+        android:id="@+id/last_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/last_name_hint"
+        android:inputType="text"
+        android:importantForAccessibility="yes"/>
+
+    <EditText
+        android:id="@+id/email_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
         android:importantForAccessibility="yes"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senha"
-        android:labelFor="@id/editTextPassword"/>
-
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/phone_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword"
+        android:hint="@string/phone_hint"
+        android:inputType="phone"
         android:importantForAccessibility="yes"/>
 
-    <Button
-        android:id="@+id/buttonLogin"
+    <!-- Botões de edição e salvar -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:importantForAccessibility="yes"/>
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/textViewForgotPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:gravity="center"
-        android:importantForAccessibility="yes"
-        android:textColor="#FF4081"/>
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:contentDescription="@string/edit_button_description"
+            android:importantForAccessibility="yes"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:visibility="gone"
+            android:contentDescription="@string/save_button_description"
+            android:importantForAccessibility="yes"/>
+    </LinearLayout>
 
 </LinearLayout>

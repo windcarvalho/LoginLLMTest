@@ -6,64 +6,112 @@
     android:layout_height="match_parent"
     tools:context="org.ufc.great.llm.screens.Tela_CL_Access_3">
 
-    <TextView
-        android:id="@+id/textViewUsernameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome de usuário ou e-mail"
-        android:importantForAccessibility="yes"
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/profile_image_description"
+        app:layout_constraintBottom_toTopOf="@+id/editProfileButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Digite seu nome de usuário ou e-mail"
-        android:importantForAccessibility="yes"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewUsernameLabel" />
-
     <TextView
-        android:id="@+id/textViewPasswordLabel"
+        android:id="@+id/firstNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Senha"
-        android:importantForAccessibility="yes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextUsername" />
+        android:text="@string/first_name_label"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+        app:layout_constraintStart_toStartOf="@+id/lastNameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/firstNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Digite sua senha"
-        android:importantForAccessibility="yes"
-        android:inputType="textPassword"
+        android:hint="@string/first_name_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+        app:layout_constraintStart_toStartOf="@+id/lastNameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/firstNameLabel" />
+
+    <TextView
+        android:id="@+id/lastNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_name_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPasswordLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/firstNameEditText" />
+
+    <EditText
+        android:id="@+id/lastNameEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/last_name_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameLabel" />
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_label"
+        app:layout_constraintEnd_toEndOf="@+id/phoneEditText"
+        app:layout_constraintStart_toStartOf="@+id/phoneEditText"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameEditText" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/phoneEditText"
+        app:layout_constraintStart_toStartOf="@+id/phoneEditText"
+        app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
+
+    <TextView
+        android:id="@+id/phoneLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_label"
+        app:layout_constraintEnd_toEndOf="@+id/profileImage"
+        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+    <EditText
+        android:id="@+id/phoneEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_hint"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/profileImage"
+        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="@id/editTextPassword"
-        app:layout_constraintStart_toStartOf="@id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+        android:text="@string/edit_button"
+        android:contentDescription="@string/edit_button_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+    <Button
+        android:id="@+id/saveProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="@id/buttonLogin"
-        app:layout_constraintStart_toStartOf="@id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+        android:text="@string/save_button"
+        android:visibility="gone"
+        android:contentDescription="@string/save_button_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

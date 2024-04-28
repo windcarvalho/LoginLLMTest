@@ -47,4 +47,50 @@
         <string name="username_edit_text_description">Campo de texto para inserir nome de usuário ou e-mail</string>
         <string name="password_edit_text_description">Campo de texto para inserir senha</string>
 
+
+        <string name="profile_image">Imagem de Perfil</string>
+        <string name="change_photo">Alterar Foto</string>
+        <string name="first_name">Nome</string>
+        <string name="last_name">Sobrenome</string>
+        <string name="email">E-mail</string>
+        <string name="phone">Telefone</string>
+        <string name="edit">Editar</string>
+        <string name="save">Salvar</string>
+
+
+    <string name="profile_image_description">Foto de perfil do usuário</string>
+    <string name="edit_text_first_name">Insira seu nome</string>
+    <string name="edit_text_last_name">Insira seu sobrenome</string>
+    <string name="edit_text_email">Insira seu e-mail</string>
+    <string name="edit_text_phone">Insira seu número de telefone</string>
+    <string name="first_name_hint">Nome</string>
+    <string name="last_name_hint">Sobrenome</string>
+    <string name="email_hint">E-mail</string>
+    <string name="phone_hint">Telefone</string>
+    <string name="change_photo_button_description">Clique para selecionar uma nova foto de perfil</string>
+    <string name="edit_button_description">Clique para editar informações pessoais</string>
+    <string name="save_button_description">Clique para salvar as alterações</string>
+    <string name="edit_button">Editar</string>
+    <string name="save_button">Salvar</string>
+
+
+        <!-- Textos para elementos da tela de perfil -->
+        <string name="profile">Perfil</string>
+        <string name="edit_profile">Editar Perfil</string>
+        <string name="save_changes">Salvar Alterações</string>
+        <string name="profile_picture">Foto de Perfil</string>
+
+        <string name="change_picture">Alterar Foto</string>
+        <string name="cancel">Cancelar</string>
+
+
+    <string name="first_name_label">Nome:</string>
+
+    <string name="last_name_label">Sobrenome:</string>
+
+    <string name="email_label">E-mail:</string>
+
+    <string name="phone_label">Telefone:</string>
+    <string name="salvar">Salvar</string>
+
 </resources>
