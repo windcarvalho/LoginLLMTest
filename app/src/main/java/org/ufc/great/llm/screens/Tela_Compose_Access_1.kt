@@ -3,112 +3,147 @@ package org.ufc.great.llm.screens
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 class Tela_Compose_Access_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginScreen(
-                onLoginClick = {
-                    // Adicione a lógica para verificar as credenciais do usuário
-                },
-                onForgotPasswordClick = {
-                    // Adicione a lógica para lidar com o clique em "Esqueceu a senha?"
-                }
-            )
+            MusicPlayer()
         }
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     @Composable
-    fun LoginScreen(
-        onLoginClick: () -> Unit,
-        onForgotPasswordClick: () -> Unit
-    ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-
-        val context = LocalContext.current
-        val keyboardController = LocalSoftwareKeyboardController.current
-
-        Surface(
-            color = MaterialTheme.colorScheme.background,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                OutlinedTextField(
-                    value = username,
-                    onValueChange = { username = it },
-                    label = { Text("Nome de usuário ou e-mail") },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        imeAction = ImeAction.Next
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onNext = { keyboardController?.hide() }
-                    ),
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
-                )
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text("Senha") },
-                    visualTransformation = PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Done
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = { keyboardController?.hide() }
-                    ),
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
-                )
-                Button(
-                    onClick = onLoginClick,
-                    // enabled = username.isNotBlank() && password.isNotBlank(),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Entrar")
+    fun MusicPlayer() {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .focusable() // Permite que o layout seja focável
+                .semantics {
+                    // Adiciona uma descrição de acessibilidade para o layout
+                    contentDescription = "Player de Música"
                 }
-                TextButton(
-                    onClick = onForgotPasswordClick,
-                    modifier = Modifier.padding(top = 8.dp)
+        ) {
+            // Título da Música
+            Text(
+                text = "Título da Música",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .focusable() // Permite que o texto seja focável
+                    .semantics {
+                        // Adiciona uma descrição de acessibilidade para o texto
+                        contentDescription = "Título da Música: Título da Música"
+                    }
+            )
+
+            // Artista
+            Text(
+                text = "Artista",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .focusable() // Permite que o texto seja focável
+                    .semantics {
+                        // Adiciona uma descrição de acessibilidade para o texto
+                        contentDescription = "Artista: Artista"
+                    }
+            )
+
+            // Álbum
+            Text(
+                text = "Álbum",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .focusable() // Permite que o texto seja focável
+                    .semantics {
+                        // Adiciona uma descrição de acessibilidade para o texto
+                        contentDescription = "Álbum: Álbum"
+                    }
+            )
+
+            // Barra de Progresso
+            LinearProgressIndicator(
+                progress = 0.5f, // Substitua pelo progresso real da música
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusable() // Permite que a barra de progresso seja focável
+                    .semantics {
+                        // Adiciona uma descrição de acessibilidade para a barra de progresso
+                        contentDescription = "Barra de Progresso"
+                    }
+            )
+
+            // Botões de Controle de Reprodução
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                IconButton(
+                    onClick = { /* Ação para Retroceder */ },
+                    modifier = Modifier
+                        .focusable() // Permite que o botão seja focável
+                        .semantics {
+                            // Adiciona uma descrição de acessibilidade para o botão
+                            contentDescription = "Retroceder"
+                        }
                 ) {
-                    Text("Esqueceu a senha?")
+                    Icon(Icons.Filled.ArrowBack, contentDescription = "Retroceder")
+                }
+                IconButton(
+                    onClick = { /* Ação para Play/Pause */ },
+                    modifier = Modifier
+                        .focusable() // Permite que o botão seja focável
+                        .semantics {
+                            // Adiciona uma descrição de acessibilidade para o botão
+                            contentDescription = "Reproduzir/Pausar"
+                        }
+                ) {
+                    Icon(Icons.Filled.PlayArrow, contentDescription = "Reproduzir/Pausar")
+                }
+                IconButton(
+                    onClick = { /* Ação para Avançar */ },
+                    modifier = Modifier
+                        .focusable() // Permite que o botão seja focável
+                        .semantics {
+                            // Adiciona uma descrição de acessibilidade para o botão
+                            contentDescription = "Avançar"
+                        }
+                ) {
+                    Icon(Icons.Filled.ArrowForward, contentDescription = "Avançar")
                 }
             }
-        }
-    }
 
-    @Preview(showBackground = true)
-    @Composable
-    fun PreviewLoginScreen() {
-        LoginScreen(
-            onLoginClick = { /* TODO */ },
-            onForgotPasswordClick = { /* TODO */ }
-        )
+            // Lista de Reprodução
+            Text(
+                text = "Lista de Reprodução",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .focusable() // Permite que o texto seja focável
+                    .semantics {
+                        // Adiciona uma descrição de acessibilidade para o texto
+                        contentDescription = "Lista de Reprodução"
+                    }
+            )
+        }
     }
 }

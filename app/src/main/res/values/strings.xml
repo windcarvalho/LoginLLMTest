@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">LoginLLMTest</string>
-    <string name="title_activity_tela_login1">Tela_Login1</string>
+    <string name="app_name">PlayerDeMusicaLLMTest</string>
+    <string name="title_activity_player_de_musica1">Player_de_Musica</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -46,5 +46,32 @@
 
         <string name="username_edit_text_description">Campo de texto para inserir nome de usuário ou e-mail</string>
         <string name="password_edit_text_description">Campo de texto para inserir senha</string>
+        <string name="seekbar_description">Barra de progresso da música</string>
+        <string name="previous_button_description">Botão Anterior</string>
+        <string name="play_pause_button_description">Botão Reproduzir/Pausar</string>
+        <string name="next_button_description">Botão Próximo</string>
+        <string name="song_info_description">Informações da música atual</string>
+        <string name="playlist_description">Lista de reprodução de músicas</string>
+
+
+
+    <string name="play">Reproduzir</string>
+    <string name="pause">Pausar</string>
+    <string name="previous_song">Voltar para a música anterior</string>
+    <string name="play_pause">Reproduzir ou pausar a música atual</string>
+    <string name="next_song">Avançar para a próxima música</string>
+    <string name="seek_bar">Barra de progresso para navegar pela música</string>
+    <string name="playlist">Lista de reprodução de músicas</string>
+    <string name="current_song_info">Nome da Música - Artista</string>
+
+    <string name="desc_previous_button">Retroceder</string>
+    <string name="desc_play_pause_button">Reproduzir/Pausar</string>
+    <string name="desc_next_button">Avançar</string>
+    <string name="desc_seek_bar">Barra de Progresso da Música</string>
+    <string name="desc_playlist_button">Abrir Lista de Reprodução</string>
+
+    <string name="current_song_info_description">Informações da Música Atual</string>
+    <string name="default_song_info">Nome da música - Artista</string>
+
 
 </resources>

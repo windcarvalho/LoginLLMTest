@@ -4,66 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ufc.great.llm.screens.Tela_CL_Access_3">
+    tools:context=".MainActivity">
 
+    <!-- Informações da música -->
     <TextView
-        android:id="@+id/textViewUsernameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome de usuário ou e-mail"
-        android:importantForAccessibility="yes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/textViewSongTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Digite seu nome de usuário ou e-mail"
-        android:importantForAccessibility="yes"
-        android:inputType="textEmailAddress"
+        android:text="Nome da Música"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewUsernameLabel" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="yes"/>
 
-    <TextView
-        android:id="@+id/textViewPasswordLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senha"
-        android:importantForAccessibility="yes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextUsername" />
-
-    <EditText
-        android:id="@+id/editTextPassword"
+    <!-- Barra de progresso -->
+    <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Digite sua senha"
-        android:importantForAccessibility="yes"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewSongTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPasswordLabel" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:max="100"
+        android:progress="0"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="yes"/>
 
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
+    <!-- Controles de reprodução -->
+    <LinearLayout
+        android:id="@+id/controlsLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="@id/editTextPassword"
-        app:layout_constraintStart_toStartOf="@id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/seekBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/textViewForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="@id/buttonLogin"
-        app:layout_constraintStart_toStartOf="@id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+        <ImageButton
+            android:id="@+id/buttonPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/previous_button_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:importantForAccessibility="yes"/>
+
+        <ImageButton
+            android:id="@+id/buttonPlayPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_foreground"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/play_pause_button_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:importantForAccessibility="yes"/>
+
+        <ImageButton
+            android:id="@+id/buttonNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/next_button_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:importantForAccessibility="yes"/>
+    </LinearLayout>
+
+    <!-- Lista de reprodução -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPlaylist"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/controlsLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="yes"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

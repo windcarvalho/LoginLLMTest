@@ -1,104 +1,125 @@
 package org.ufc.great.llm.screens
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 class Tela_Compose_Access_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginScreen(
-                onLoginClick = {
-                    // Adicione a lógica para verificar as credenciais do usuário
-                },
-                onForgotPasswordClick = {
-                    // Adicione a lógica para lidar com o clique em "Esqueceu a senha?"
-                }
-            )
+            MusicPlayerScreen()
         }
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
-    fun LoginScreen(
-        onLoginClick: () -> Unit,
-        onForgotPasswordClick: () -> Unit
-    ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        val context = LocalContext.current
-        val keyboardController = LocalSoftwareKeyboardController.current
+    fun MusicPlayerScreen() {
+        // Layout principal
+        Scaffold(
+            topBar = { MusicPlayerTopBar() },
+            content = { MusicPlayerContent() }
+        )
+    }
 
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun MusicPlayerTopBar() {
+        TopAppBar(
+            title = { Text(text = "Meu Player de Música") },
+
+            )
+    }
+
+    @Composable
+    fun MusicPlayerContent() {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .padding(16.dp)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Username or Email *") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                keyboardActions = KeyboardActions(onNext = { /* Focus on password field */ })
-            )
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password *") },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(onDone = { onLoginClick })
-            )
-            Button(
-                onClick = { onLoginClick },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
-            ) {
-                Text("Login")
+            MusicInfo()
+            Spacer(modifier = Modifier.height(16.dp))
+            MusicControls()
+        }
+    }
+
+    @Composable
+    fun MusicInfo() {
+        Text(text = "Nome da Música", style = MaterialTheme.typography.bodyMedium)
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = "Artista - Álbum", style = MaterialTheme.typography.bodyMedium)
+    }
+
+    @Composable
+    fun MusicControls() {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            IconButton(onClick = { /* Ação de retroceder */ }) {
+                Icon(Icons.Filled.ArrowBack, contentDescription = "Retroceder")
             }
-            TextButton(
-                onClick = { onForgotPasswordClick },
-                modifier = Modifier.padding(top = 16.dp)
-            ) {
-                Text("Forgot Password?")
+            IconButton(onClick = { /* Ação de reproduzir/pausar */ }) {
+                Icon(Icons.Filled.PlayArrow, contentDescription = "Reproduzir/Pausar")
+            }
+            IconButton(onClick = { /* Ação de avançar */ }) {
+                Icon(Icons.Filled.ArrowForward, contentDescription = "Avançar")
             }
         }
     }
 
-    @Preview(showBackground = true)
     @Composable
-    fun PreviewLoginScreen() {
-        LoginScreen(
-            onLoginClick = { /* TODO */ },
-            onForgotPasswordClick = { /* TODO */ }
+    fun MusicProgressBar() {
+        Slider(
+            value = 0f, // Valor da posição da música
+            onValueChange = { /* Ação ao alterar a posição da música */ },
+            valueRange = 0f..100f,
+            modifier = Modifier.fillMaxWidth(),
+            // Adicione um rótulo explicativo para a barra de progresso
+            //contentDescription = "Barra de Progresso da Música" Este trecho do codigo nao funciona
         )
     }
+
+    @Composable
+    fun PlaylistScreen(playlist: List<String>) {
+        LazyColumn {
+            items(playlist) { song ->
+                Text(text = song, modifier = Modifier.padding(8.dp))
+            }
+        }
+    }
+
+
 
 }

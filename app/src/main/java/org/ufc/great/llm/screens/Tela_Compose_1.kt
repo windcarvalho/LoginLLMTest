@@ -3,74 +3,86 @@ package org.ufc.great.llm.screens
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 class Tela_Compose_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginScreen(
-                onLoginClick = {
-                    // Adicione a lógica para verificar as credenciais do usuário
-                },
-                onForgotPasswordClick = {
-                    // Adicione a lógica para lidar com o clique em "Esqueceu a senha?"
-                }
-            )
+            MusicPlayer()
         }
     }
 
-@Composable
-fun LoginScreen(onLoginClick: () -> Unit, onForgotPasswordClick: () -> Unit) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
-    Surface(
-        color = MaterialTheme.colorScheme.background,
-        modifier = Modifier.fillMaxSize()
-    ) {
+    @Composable
+    fun MusicPlayer() {
         Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Nome de usuário ou e-mail") },
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+            // Título da Música
+            Text(
+                text = "Título da Música",
+                style = MaterialTheme.typography.bodyMedium
             )
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Senha") },
-                modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
+
+            // Artista
+            Text(
+                text = "Artista",
+                style = MaterialTheme.typography.bodyMedium
             )
-            Button(onClick = onLoginClick, modifier = Modifier.fillMaxWidth()) {
-                Text("Entrar")
+
+            // Álbum
+            Text(
+                text = "Álbum",
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            // Barra de Progresso
+            LinearProgressIndicator(
+                progress = 0.5f, // Substitua pelo progresso real da música
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Botões de Controle de Reprodução
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                IconButton(onClick = { /* Ação para Retroceder */ }) {
+                    Icon(Icons.Filled.ArrowBack, contentDescription = "Retroceder")
+                }
+                IconButton(onClick = { /* Ação para Play/Pause */ }) {
+                    Icon(Icons.Filled.PlayArrow, contentDescription = "Reproduzir")
+                }
+                IconButton(onClick = { /* Ação para Avançar */ }) {
+                    Icon(Icons.Filled.ArrowForward, contentDescription = "Avançar")
+                }
             }
-            TextButton(onClick = onForgotPasswordClick) {
-                Text("Esqueceu a senha?")
-            }
+
+            // Lista de Reprodução
+            Text(
+                text = "Lista de Reprodução",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 16.dp)
+            )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewLoginScreen() {
-    LoginScreen(onLoginClick = { /* TODO */ }, onForgotPasswordClick = { /* TODO */ })
-}
 
 }

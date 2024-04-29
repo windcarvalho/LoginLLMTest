@@ -17,7 +17,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
@@ -25,11 +29,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.ufc.great.llm.screens.*
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
+import org.ufc.great.llm.screens.Tela_1
+import org.ufc.great.llm.screens.Tela_2
+import org.ufc.great.llm.screens.Tela_3
+import org.ufc.great.llm.screens.Tela_Access_1
+import org.ufc.great.llm.screens.Tela_Access_2
+import org.ufc.great.llm.screens.Tela_Access_3
+import org.ufc.great.llm.screens.Tela_CL_1
+import org.ufc.great.llm.screens.Tela_CL_2
+import org.ufc.great.llm.screens.Tela_CL_3
+import org.ufc.great.llm.screens.Tela_CL_Access_1
+import org.ufc.great.llm.screens.Tela_CL_Access_2
+import org.ufc.great.llm.screens.Tela_CL_Access_3
+import org.ufc.great.llm.screens.Tela_Compose_1
+import org.ufc.great.llm.screens.Tela_Compose_2
+import org.ufc.great.llm.screens.Tela_Compose_3
+import org.ufc.great.llm.screens.Tela_Compose_Access_1
+import org.ufc.great.llm.screens.Tela_Compose_Access_2
+import org.ufc.great.llm.screens.Tela_Compose_Access_3
 
 class MainActivity : ComponentActivity() {
     // Lista de pares contendo o nome do item e a classe da Activity correspondente
@@ -71,7 +88,7 @@ class MainActivity : ComponentActivity() {
              // Título
                 Column {
                     Text(
-                        text = "Telas de LOGIN com ChatGPT 3.5",
+                        text = "Telas de Player de música com ChatGPT 3.5",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.ExtraBold,
                         color = Color.White,

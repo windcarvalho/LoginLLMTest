@@ -1,35 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editTextUsername"
+    <!-- Barra de progresso -->
+    <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome de usuário ou E-mail"
-        android:inputType="textEmailAddress" />
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:thumb="@drawable/ic_launcher_background" />
 
-    <EditText
-        android:id="@+id/editTextPassword"
+    <!-- Botões de controle -->
+    <LinearLayout
+        android:id="@+id/layout_controls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword" />
+        android:layout_below="@id/seekBar"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Entrar" />
+        <ImageButton
+            android:id="@+id/btnPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background" />
 
+        <ImageButton
+            android:id="@+id/btnPlayPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background" />
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background" />
+    </LinearLayout>
+
+    <!-- Informações da música -->
     <TextView
-        android:id="@+id/textViewForgotPassword"
+        android:id="@+id/txtSongInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/layout_controls"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Esqueceu a senha?"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:textSize="16sp" />
+
+    <!-- Lista de reprodução -->
+    <ListView
+        android:id="@+id/playlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSongInfo"
+        android:layout_marginTop="16dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+</RelativeLayout>
