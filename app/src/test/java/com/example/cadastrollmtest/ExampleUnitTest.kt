@@ -1,4 +1,4 @@
-package com.example.produtollmtest
+package com.example.cadastrollmtest
 
 import org.junit.Test
 

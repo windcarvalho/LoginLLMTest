@@ -12,99 +12,116 @@ import androidx.compose.ui.Modifier
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.produtollmtest.R
+import com.example.cadastrollmtest.R
 
 class Tela_Compose_3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProductDetailScreen("Nome do produto","Descrição do produto","99,99", R.drawable.ic_launcher_background,/*""*/
-            )
+            MyApp {
+                RegisterForm()
+            }
         }
     }
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
     @Composable
-    fun ProductDetailScreen(
-        productName: String,
-        productDescription: String,
-        productPrice: String,
-        productImageRes: Int,
-    ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = productName) },
-                )
-            },
-            content = {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = productImageRes),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp),
-                        contentScale = ContentScale.Fit
-                    )
+    fun MyApp(content: @Composable () -> Unit) {
+        MaterialTheme {
+            Surface(color = MaterialTheme.colorScheme.background) {
+                content()
+            }
+        }
+    }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+    @Composable
+    fun RegisterForm() {
+        var name by remember { mutableStateOf("") }
+        var lastName by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+        var dob by remember { mutableStateOf("") }
+        var gender by remember { mutableStateOf("") }
 
-                    Text(
-                        text = productDescription,
-                        style = MaterialTheme.typography.displayMedium
-                    )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text("Nome") },
+                modifier = Modifier.fillMaxWidth()
+            )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+            OutlinedTextField(
+                value = lastName,
+                onValueChange = { lastName = it },
+                label = { Text("Sobrenome") },
+                modifier = Modifier.fillMaxWidth()
+            )
 
-                    Text(
-                        text = "Preço: $productPrice",
-                        style = MaterialTheme.typography.displayMedium,
-                        color = Color.Black
-                    )
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("E-mail") },
+                modifier = Modifier.fillMaxWidth()
+            )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Senha") },
+                modifier = Modifier.fillMaxWidth()
+            )
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Button(onClick = {  }) {
-                            Text("Adicionar ao Carrinho")
-                        }
+            OutlinedTextField(
+                value = dob,
+                onValueChange = { dob = it },
+                label = { Text("Data de Nascimento") },
+                modifier = Modifier.fillMaxWidth()
+            )
 
-                        Spacer(modifier = Modifier.width(16.dp))
+            OutlinedTextField(
+                value = gender,
+                onValueChange = { gender = it },
+                label = { Text("Gênero") },
+                modifier = Modifier.fillMaxWidth()
+            )
 
-                        Button(onClick = {  }) {
-                            Text("Favoritos")
-                        }
-                    }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(onClick = { /* TODO: Implementar ação de envio */ }) {
+                    Text("Enviar")
+                }
+                Button(onClick = { /* TODO: Implementar ação de cancelar */ }) {
+                    Text("Cancelar")
                 }
             }
-        )
+        }
     }
 
     @Preview(showBackground = true)
     @Composable
-    fun PreviewProductDetailScreen() {
-        ProductDetailScreen(
-            productName = "Nome do Produto",
-            productDescription = "Descrição do Produto",
-            productPrice = "$9.99",
-            productImageRes = R.drawable.ic_launcher_background,
-        )
+    fun DefaultPreview() {
+        MyApp {
+            RegisterForm()
+        }
     }
 }

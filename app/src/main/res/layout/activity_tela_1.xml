@@ -1,59 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/productImage"
+    <EditText
+        android:id="@+id/editTextFirstName"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
-        android:contentDescription="@string/product_image" />
-
-    <TextView
-        android:id="@+id/productName"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/productImage"
-        android:text="@string/product_name"
-        android:textSize="24sp"
-        android:padding="16dp"/>
+        android:hint="Nome" />
 
-    <TextView
-        android:id="@+id/productDescription"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/productName"
-        android:text="@string/product_description"
-        android:textSize="16sp"
-        android:padding="16dp"/>
+        android:hint="Sobrenome" />
 
-    <TextView
-        android:id="@+id/productPrice"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/productDescription"
-        android:text="@string/product_price"
-        android:textSize="20sp"
-        android:padding="16dp"/>
+        android:hint="Endereço de E-mail"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextDateOfBirth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Data de Nascimento"
+        android:inputType="date" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masculino" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feminino" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outro" />
+    </RadioGroup>
 
     <Button
-        android:id="@+id/addToCartButton"
+        android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/productPrice"
-        android:text="@string/add_to_cart"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+        android:text="Enviar" />
 
     <Button
-        android:id="@+id/addToFavoritesButton"
+        android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/addToCartButton"
-        android:text="@string/add_to_favorites"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"/>
+        android:text="Cancelar" />
 
-</RelativeLayout>
+</LinearLayout>

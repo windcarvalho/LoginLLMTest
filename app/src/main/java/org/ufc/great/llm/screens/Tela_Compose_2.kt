@@ -1,5 +1,6 @@
 package org.ufc.great.llm.screens
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -9,82 +10,113 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.produtollmtest.R
+import com.example.cadastrollmtest.R
 
 class Tela_Compose_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProductDetailsScreen(
-
-            )
+            CadastroScreen()
         }
     }
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun ProductDetailsScreen() {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Product Image
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "Product Image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                contentScale = ContentScale.Crop
-            )
+    fun CadastroScreen() {
+        var nome by remember { mutableStateOf("") }
+        var sobrenome by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var senha by remember { mutableStateOf("") }
+        var dataNascimento by remember { mutableStateOf("") }
+        var genero by remember { mutableStateOf("") }
 
-            // Product Name
-            Text(
-                text = "Product Name",
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-
-            // Product Description
-            Text(
-                text = "Product Description",
-                fontSize = 16.sp,
-                color = Color.Gray
-            )
-
-            // Product Price
-            Text(
-                text = "$99.99",
-                fontSize = 20.sp,
-                color = Color.Black
-            )
-
-            // Add to Cart Button
-            Button(
-                onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(horizontal = 16.dp)
-            ) {
-                Text(text = "Add to Cart")
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = "Cadastro") },
+                    colors = TopAppBarDefaults.topAppBarColors(),
+                )
+            },
+            content = {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    OutlinedTextField(
+                        value = nome,
+                        onValueChange = { nome = it },
+                        label = { Text("Nome") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedTextField(
+                        value = sobrenome,
+                        onValueChange = { sobrenome = it },
+                        label = { Text("Sobrenome") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedTextField(
+                        value = email,
+                        onValueChange = { email = it },
+                        label = { Text("E-mail") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedTextField(
+                        value = senha,
+                        onValueChange = { senha = it },
+                        label = { Text("Senha") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedTextField(
+                        value = dataNascimento,
+                        onValueChange = { dataNascimento = it },
+                        label = { Text("Data de Nascimento") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedTextField(
+                        value = genero,
+                        onValueChange = { genero = it },
+                        label = { Text("Gênero") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Button(onClick = { /* implementar a lógica de envio */ }) {
+                            Text("Enviar")
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Button(onClick = { /* implementar a lógica de cancelamento */ }) {
+                            Text("Cancelar")
+                        }
+                    }
+                }
             }
+        )
+    }
 
-            // Add to Favorites Button
-            Button(
-                onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(horizontal = 16.dp)
-            ) {
-                Text(text = "Add to Favorites")
-            }
-        }
+    @Preview
+    @Composable
+    fun PreviewCadastroScreen() {
+        CadastroScreen()
     }
 }
 

@@ -2,7 +2,7 @@ package org.ufc.great.llm.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.produtollmtest.R
+import com.example.cadastrollmtest.R
 
 class Tela_CL_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,75 +6,129 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.produtollmtest.R
+import com.example.cadastrollmtest.R
 
 class Tela_Compose_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProductDetailScreen(
-            )
-        }
-    }
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun ProductDetailScreen() {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = "Detalhes do Produto") }
+            MaterialTheme {
+                CadastroScreen(
+                    onCancel = { /* Implementar ação de cancelar */ },
+                    onEnviar = { cadastroData -> /* Implementar ação de enviar dados */ }
                 )
             }
+        }
+    }
+
+    @Composable
+    fun CadastroScreen(onCancel: () -> Unit, onEnviar: (CadastroData) -> Unit) {
+        var nome by remember { mutableStateOf("") }
+        var sobrenome by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var senha by remember { mutableStateOf("") }
+        var dataNascimento by remember { mutableStateOf("") }
+        var genero by remember { mutableStateOf("") }
+
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+            TextField(
+                value = nome,
+                onValueChange = { nome = it },
+                label = { Text("Nome") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = sobrenome,
+                onValueChange = { sobrenome = it },
+                label = { Text("Sobrenome") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("E-mail") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = senha,
+                onValueChange = { senha = it },
+                label = { Text("Senha") },
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = dataNascimento,
+                onValueChange = { dataNascimento = it },
+                label = { Text("Data de Nascimento") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = genero,
+                onValueChange = { genero = it },
+                label = { Text("Gênero") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
             ) {
-                // Aqui você incluirá os elementos da tela, como nome do produto, descrição, preço, imagem, botões de ação, etc.
-                Text(text = "Nome do Produto", style = MaterialTheme.typography.displayMedium)
-                Text(text = "Descrição do Produto", style = MaterialTheme.typography.displayMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
-                Text(text = "$10.99", style = MaterialTheme.typography.displayMedium)
-                Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = "Imagem do Produto",
-                    modifier = Modifier.size(200.dp)
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    Button(onClick = { /* Ação ao clicar no botão Adicionar ao Carrinho */ }) {
-                        Text(text = "Adicionar ao Carrinho")
-                    }
-                    Button(onClick = { /* Ação ao clicar no botão Favoritos */ }) {
-                        Text(text = "Favoritos")
-                    }
+                Button(onClick = onCancel) {
+                    Text("Cancelar")
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Button(onClick = { onEnviar(CadastroData(nome, sobrenome, email, senha, dataNascimento, genero)) }) {
+                    Text("Enviar")
                 }
             }
         }
     }
 
-    @Preview
+    data class CadastroData(
+        val nome: String,
+        val sobrenome: String,
+        val email: String,
+        val senha: String,
+        val dataNascimento: String,
+        val genero: String
+    )
+
+    @Preview(showBackground = true)
     @Composable
-    fun PreviewProductDetailScreen() {
-        ProductDetailScreen()
+    fun DefaultPreview() {
+        MaterialTheme {
+            CadastroScreen({}, {})
+        }
     }
 
 }

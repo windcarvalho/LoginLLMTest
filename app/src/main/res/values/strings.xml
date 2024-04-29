@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">ProdutoLLMTest</string>
-    <string name="title_activity_tela_login1">Tela_Produto1</string>
+    <string name="app_name">CadastroLLMTest</string>
+    <string name="title_activity_tela_login1">Tela_Cadastro1</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -43,8 +43,8 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
 
-        <string name="username_edit_text_description">Campo de texto para inserir nome de usuário ou e-mail</string>
-        <string name="password_edit_text_description">Campo de texto para inserir senha</string>
+    <string name="username_edit_text_description">Campo de texto para inserir nome de usuário ou e-mail</string>
+    <string name="password_edit_text_description">Campo de texto para inserir senha</string>
 
     <string name="product_name">Nome do Produto</string>
     <string name="product_description">Descrição do Produto</string>
@@ -63,6 +63,12 @@
     <string name="botao_adicionar_favoritos">Adicionar aos Favoritos</string>
     <string name="descricao_botao_adicionar_carrinho">Adiciona este item ao carrinho de compras</string>
     <string name="descricao_botao_adicionar_favoritos">Adiciona este item aos favoritos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_main">Formulário de Cadastro</string>
+    <string name="button_submit">Enviar</string>
+    <string name="button_cancel">Cancelar</string>
 
 </resources>
