@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.loginllmtest"
+    namespace = "com.PlayerDeMusica.loginllmtest"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.loginllmtest"
+        applicationId = "com.PlayerDeMusica.loginllmtest"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
