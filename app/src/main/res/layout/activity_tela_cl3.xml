@@ -4,63 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageViewProduct"
+    <EditText
+        android:id="@+id/editTextNome"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewProductName"
+    <EditText
+        android:id="@+id/editTextSobrenome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Nome do Produto"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@id/imageViewProduct"
-        app:layout_constraintStart_toStartOf="@id/imageViewProduct"
-        app:layout_constraintTop_toBottomOf="@id/imageViewProduct" />
+        android:hint="Sobrenome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
 
-    <TextView
-        android:id="@+id/textViewProductDescription"
+    <EditText
+        android:id="@+id/editTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Descrição do Produto"
-        app:layout_constraintEnd_toEndOf="@id/textViewProductName"
-        app:layout_constraintStart_toStartOf="@id/textViewProductName"
-        app:layout_constraintTop_toBottomOf="@id/textViewProductName" />
+        android:hint="E-mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSobrenome" />
 
-    <TextView
-        android:id="@+id/textViewProductPrice"
+    <EditText
+        android:id="@+id/editTextSenha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Preço do Produto"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@id/textViewProductDescription"
-        app:layout_constraintStart_toStartOf="@id/textViewProductDescription"
-        app:layout_constraintTop_toBottomOf="@id/textViewProductDescription" />
+        android:hint="Senha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextDataNascimento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Data de Nascimento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+
+    <Spinner
+        android:id="@+id/spinnerGenero"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDataNascimento" />
 
     <Button
-        android:id="@+id/buttonAddToCart"
+        android:id="@+id/btnEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar ao Carrinho"
-        app:layout_constraintEnd_toEndOf="@id/textViewProductPrice"
-        app:layout_constraintStart_toStartOf="@id/textViewProductPrice"
-        app:layout_constraintTop_toBottomOf="@id/textViewProductPrice" />
+        android:text="Enviar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGenero" />
 
     <Button
-        android:id="@+id/buttonAddToFavorites"
+        android:id="@+id/btnCancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar aos Favoritos"
-        app:layout_constraintEnd_toEndOf="@id/buttonAddToCart"
-        app:layout_constraintStart_toStartOf="@id/buttonAddToCart"
-        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart" />
+        android:text="Cancelar"
+        app:layout_constraintEnd_toStartOf="@+id/btnEnviar"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGenero" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,77 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ufc.great.llm.screens.Tela_CL_Access_1">
+    tools:context=".MainActivity">
 
-    <!-- Imagem do Produto -->
-    <ImageView
-        android:id="@+id/imageViewProduto"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:contentDescription="@string/descricao_imagem_produto"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Nome do Produto -->
-    <TextView
-        android:id="@+id/textViewNomeProduto"
+    <!-- Campo Nome -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/nome_produto_exemplo"
-        android:textSize="24sp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewProduto" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:labelFor="@+id/editTextName"
+        android:hint="Nome">
 
-    <!-- Preço do Produto -->
-    <TextView
-        android:id="@+id/textViewPrecoProduto"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu nome" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo Sobrenome -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutLastName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/preco_produto_exemplo"
-        android:textSize="18sp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewNomeProduto" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName"
+        android:labelFor="@+id/editTextLastName"
+        android:hint="Sobrenome">
 
-    <!-- Descrição do Produto -->
-    <TextView
-        android:id="@+id/textViewDescricaoProduto"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu sobrenome" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo E-mail -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/descricao_produto_exemplo"
-        android:textSize="16sp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPrecoProduto" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLastName"
+        android:labelFor="@+id/editTextEmail"
+        android:hint="E-mail">
 
-    <!-- Botão Adicionar ao Carrinho -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu e-mail"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo Senha -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
+        android:labelFor="@+id/editTextPassword"
+        android:hint="Senha">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite sua senha"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo Data de Nascimento -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutDateOfBirth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
+        android:labelFor="@+id/editTextDateOfBirth"
+        android:hint="Data de Nascimento">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecione sua data de nascimento"
+            android:inputType="date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo Gênero -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutGender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDateOfBirth"
+        android:labelFor="@+id/editTextGender"
+        android:hint="Gênero">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu gênero"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Botão Enviar -->
     <Button
-        android:id="@+id/buttonAdicionarCarrinho"
+        android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/botao_adicionar_carrinho"
-        android:contentDescription="@string/descricao_botao_adicionar_carrinho"
+        android:text="@string/button_submit"
+        android:contentDescription="Enviar formulário"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewDescricaoProduto" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutGender" />
 
-    <!-- Botão Adicionar aos Favoritos -->
+    <!-- Botão Cancelar -->
     <Button
-        android:id="@+id/buttonAdicionarFavoritos"
+        android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/botao_adicionar_favoritos"
-        android:contentDescription="@string/descricao_botao_adicionar_favoritos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonAdicionarCarrinho" />
+        android:text="@string/button_cancel"
+        android:contentDescription="Cancelar operação"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSubmit"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutGender" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

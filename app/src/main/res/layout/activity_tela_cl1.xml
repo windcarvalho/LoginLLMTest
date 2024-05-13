@@ -1,73 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="org.ufc.great.llm.screens.Tela_CL_1">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-        <!-- Imagem do Produto -->
-        <ImageView
-            android:id="@+id/imageViewProduto"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Nome do Produto -->
-        <TextView
-            android:id="@+id/textViewNomeProduto"
+        <!-- Campo Nome -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nome do Produto"
-            android:textSize="24sp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageViewProduto" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Preço do Produto -->
-        <TextView
-            android:id="@+id/textViewPrecoProduto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="R$ 100,00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewNomeProduto" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Descrição do Produto -->
-        <TextView
-            android:id="@+id/textViewDescricaoProduto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Descrição do Produto"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewPrecoProduto" />
+        <!-- Outros campos semelhantes -->
 
-        <!-- Botão Adicionar ao Carrinho -->
+        <!-- Botão Enviar -->
         <Button
-            android:id="@+id/buttonAdicionarCarrinho"
+            android:id="@+id/buttonSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adicionar ao Carrinho"
+            android:text="Enviar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewDescricaoProduto" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutGender" />
 
-        <!-- Botão Adicionar aos Favoritos -->
+        <!-- Botão Cancelar -->
         <Button
-            android:id="@+id/buttonAdicionarFavoritos"
+            android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adicionar aos Favoritos"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonAdicionarCarrinho" />
+            android:text="Cancelar"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSubmit"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutGender" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,81 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/imageViewProduct"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
-    android:contentDescription="@string/product_image_description"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textViewProductName"
-        android:layout_width="0dp"
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/product_name"
-        android:textSize="24sp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Nome"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewProduct" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Digite seu nome" />
 
-    <TextView
-        android:id="@+id/textViewProductDescription"
+    <EditText
+        android:id="@+id/editTextName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/product_description"
-        android:textSize="16sp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:importantForAccessibility="yes"
+        android:hint="Digite seu nome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewProductName" />
+        app:layout_constraintStart_toEndOf="@+id/textViewName"
+        app:layout_constraintTop_toTopOf="@+id/textViewName"
+        android:contentDescription="Digite seu nome" />
 
-    <TextView
-        android:id="@+id/textViewProductPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/product_price"
-        android:textSize="20sp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewProductDescription" />
+    <!-- Repita o mesmo padrão para os outros campos -->
 
     <Button
-        android:id="@+id/buttonAddToCart"
-        android:layout_width="0dp"
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_to_cart"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:importantForAccessibility="yes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewProductPrice" />
+        android:text="Cancelar"
+        android:contentDescription="Cancelar o formulário de cadastro"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSubmit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <Button
-        android:id="@+id/buttonAddToFavorites"
-        android:layout_width="0dp"
+        android:id="@+id/buttonSubmit"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_to_favorites"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:importantForAccessibility="yes"
+        android:text="Enviar"
+        android:contentDescription="Enviar o formulário de cadastro"
+        android:background="?android:attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
