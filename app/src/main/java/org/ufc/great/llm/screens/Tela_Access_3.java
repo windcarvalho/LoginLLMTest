@@ -3,35 +3,46 @@ package org.ufc.great.llm.screens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.cadastrollmtest.R;
 
-public class Tela_Access_3 extends AppCompatActivity {
-    private EditText editTextName, editTextLastName; // Adicione outros campos conforme necessário
-    private Button buttonSubmit, buttonCancel;
+import org.ufc.great.llm.screens.Adapters.TaskAdapterAccess_Tela_3;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Tela_Access_3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_access_3);
 
-        // Inicialização dos componentes da interface
-        editTextName = findViewById(R.id.editTextName);
-        editTextLastName = findViewById(R.id.editTextLastName);
-        // Inicialize outros campos e botões conforme necessário
+        ListView listViewTasks = findViewById(R.id.list_view_tasks);
+        TextView emptyView = findViewById(R.id.empty_view);
 
-        buttonSubmit = findViewById(R.id.buttonSubmit);
-        buttonCancel = findViewById(R.id.buttonCancel);
+        ArrayList<Task_Tela_3> tasks = new ArrayList<>();
+        tasks.add(new Task_Tela_3(false, "Tarefa 1", "2024-04-05"));
+        tasks.add(new Task_Tela_3(false, "Tarefa 2", "2024-04-04"));
+        tasks.add(new Task_Tela_3(false, "Tarefa 3", "2024-04-03"));
 
-        // Define os ouvintes de clique para os botões
-        buttonSubmit.setOnClickListener(view -> {
-            // Lógica para enviar o formulário
-        });
+        // Ordenando as tarefas por data (decrescente)
+        Collections.sort(tasks, (task1, task2) -> task2.getDate().compareTo(task1.getDate()));
 
-        buttonCancel.setOnClickListener(view -> {
-            // Lógica para cancelar o cadastro
-        });
+        TaskAdapterAccess_Tela_3 adapter = new TaskAdapterAccess_Tela_3(this, tasks);
+        listViewTasks.setAdapter(adapter);
+
+        // Exibindo a empty view se não houver tarefas
+        if (tasks.isEmpty()) {
+            listViewTasks.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            listViewTasks.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 }
