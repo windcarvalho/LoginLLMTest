@@ -1,120 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome Completo"
-        android:labelFor="@+id/editTextFirstName"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/editTextFirstName"
+    <ListView
+        android:id="@+id/taskListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite seu nome"
-        android:importantForAccessibility="yes"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Endereço de E-mail"
-        android:labelFor="@+id/editTextEmail"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite seu e-mail"
-        android:inputType="textEmailAddress"
-        android:importantForAccessibility="yes"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senha"
-        android:labelFor="@+id/editTextPassword"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite sua senha"
-        android:inputType="textPassword"
-        android:importantForAccessibility="yes"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data de Nascimento"
-        android:labelFor="@+id/editTextDateOfBirth"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/editTextDateOfBirth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="DD/MM/AAAA"
-        android:inputType="date"
-        android:importantForAccessibility="yes"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gênero"
-        android:textStyle="bold"/>
-
-    <RadioGroup
-        android:id="@+id/radioGroupGender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:importantForAccessibility="yes">
-
-        <RadioButton
-            android:id="@+id/radioButtonMale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Masculino"
-            android:importantForAccessibility="yes"/>
-
-        <RadioButton
-            android:id="@+id/radioButtonFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Feminino"
-            android:importantForAccessibility="yes"/>
-
-        <RadioButton
-            android:id="@+id/radioButtonOther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Outro"
-            android:importantForAccessibility="yes"/>
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enviar"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
         android:importantForAccessibility="yes"
-        android:contentDescription="Botão para enviar o formulário."/>
+        android:descendantFocusability="blocksDescendants" />
 
-    <Button
-        android:id="@+id/buttonCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:importantForAccessibility="yes"
-        android:contentDescription="Botão para cancelar o cadastro."/>
-
-</LinearLayout>
+</RelativeLayout>

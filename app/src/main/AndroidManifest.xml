@@ -13,6 +13,18 @@
         android:theme="@style/Theme.LoginLLMTest"
         tools:targetApi="31">
         <activity
+            android:name="org.ufc.great.llm.screens.Tela_Access_1"
+            android:exported="false"
+            android:theme="@style/Theme.LoginLLMTest" />
+        <activity
+            android:name="org.ufc.great.llm.screens.TaskAdapter"
+            android:exported="false" />
+        <activity
+            android:name="org.ufc.great.llm.screens.Tela_1"
+            android:exported="false"
+            android:label="@string/title_activity_tela_login1"
+            android:theme="@style/Theme.LoginLLMTest" />
+        <activity
             android:name="org.ufc.great.llm.screens.Tela_CL_1"
             android:exported="false"
             android:theme="@style/Theme.LoginLLMTest" />
@@ -35,15 +47,6 @@
         <activity
             android:name="org.ufc.great.llm.screens.Tela_2"
             android:exported="false"
-            android:theme="@style/Theme.LoginLLMTest" />
-        <activity
-            android:name="org.ufc.great.llm.screens.Tela_Access_1"
-            android:exported="false"
-            android:theme="@style/Theme.LoginLLMTest" />
-        <activity
-            android:name="org.ufc.great.llm.screens.Tela_1"
-            android:exported="false"
-            android:label="@string/title_activity_tela_login1"
             android:theme="@style/Theme.LoginLLMTest" />
         <activity
             android:name="org.ufc.great.llm.screens.Tela_Compose_Access_1"
