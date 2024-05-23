@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -21,9 +26,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.focusOrder
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import com.example.cadastrollmtest.R
@@ -34,7 +43,7 @@ class Tela_Compose_Access_3<VisualTransformation> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                RegisterForm()
+                TaskListScreen()
             }
         }
     }
@@ -49,86 +58,89 @@ fun MyApp(content: @Composable () -> Unit) {
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterForm() {
-    var name by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var dob by remember { mutableStateOf("") }
-    var gender by remember { mutableStateOf("") }
+fun TaskListScreen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Lista de Tarefas") }
+            )
+        },
+        content = {
+            TaskList()
+        }
+    )
+}
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+@Composable
+fun TaskItem(task: Task, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .focusable()
+            .clickable(enabled = true, onClickLabel = "Concluir tarefa", onClick = {/*TODO: update this*/}),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Nome") },
-            modifier = Modifier.fillMaxWidth()
+        Checkbox(
+            checked = false,
+            onCheckedChange = { /* TODO: Implementar lógica de marcado */ },
+            modifier = Modifier.padding(end = 16.dp)
+//            contentDescription = "Marcar tarefa como concluída"
         )
-
-        OutlinedTextField(
-            value = lastName,
-            onValueChange = { lastName = it },
-            label = { Text("Sobrenome") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("E-mail") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Senha") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = dob,
-            onValueChange = { dob = it },
-            label = { Text("Data de Nascimento") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = gender,
-            onValueChange = { gender = it },
-            label = { Text("Gênero") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Button(onClick = { /* TODO: Implementar ação de envio */ }) {
-                Text("Enviar")
-            }
-            Button(onClick = { /* TODO: Implementar ação de cancelar */ }) {
-                Text("Cancelar")
-            }
+        Column {
+            Text(
+                text = task.name,
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier
+                    .padding(bottom = 4.dp)
+                    .semantics {
+                        contentDescription = "Nome da tarefa: ${task.name}"
+                    }
+            )
+            Text(
+                text = task.date,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.semantics {
+                    contentDescription = "Data da tarefa: ${task.date}"
+                }
+            )
         }
     }
 }
+
+@Composable
+fun TaskList() {
+    val tasks = remember {
+        mutableStateOf(
+            listOf(
+                Task("Fazer compras", "2024-04-05"),
+                Task("Estudar para o exame", "2024-04-04"),
+                Task("Pagar contas", "2024-04-03")
+            )
+        )
+    }
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        itemsIndexed(tasks.value) { index, task ->
+            TaskItem(task = task)
+        }
+    }
+}
+
+
+data class Task(val name: String, val date: String)
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MyApp {
-        RegisterForm()
+        TaskListScreen()
     }
 }

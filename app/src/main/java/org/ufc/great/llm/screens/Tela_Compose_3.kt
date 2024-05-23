@@ -6,10 +6,13 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -30,7 +33,7 @@ class Tela_Compose_3 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                RegisterForm()
+                TaskListScreen()
             }
         }
     }
@@ -39,89 +42,77 @@ class Tela_Compose_3 : AppCompatActivity() {
     fun MyApp(content: @Composable () -> Unit) {
         MaterialTheme {
             Surface(color = MaterialTheme.colorScheme.background) {
-                content()
+                TaskListScreen()
+            }
+        }
+    }
+
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun TaskListScreen() {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Lista de Tarefas") }
+                )
+            },
+            content = {
+                TaskList()
+            }
+        )
+    }
+
+    @Composable
+    fun TaskList() {
+        val tasks = remember {
+            mutableStateOf(
+                listOf(
+                    Task("Fazer compras", "2024-04-05"),
+                    Task("Estudar para o exame", "2024-04-04"),
+                    Task("Pagar contas", "2024-04-03")
+                )
+            )
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(tasks.value) { task ->
+                TaskItem(task = task)
             }
         }
     }
 
     @Composable
-    fun RegisterForm() {
-        var name by remember { mutableStateOf("") }
-        var lastName by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        var dob by remember { mutableStateOf("") }
-        var gender by remember { mutableStateOf("") }
-
-        Column(
+    fun TaskItem(task: Task) {
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Nome") },
-                modifier = Modifier.fillMaxWidth()
+            Checkbox(
+                checked = false,
+                onCheckedChange = { /* TODO: Implementar lógica de marcado */ },
+                modifier = Modifier.padding(end = 16.dp)
             )
-
-            OutlinedTextField(
-                value = lastName,
-                onValueChange = { lastName = it },
-                label = { Text("Sobrenome") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("E-mail") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Senha") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            OutlinedTextField(
-                value = dob,
-                onValueChange = { dob = it },
-                label = { Text("Data de Nascimento") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            OutlinedTextField(
-                value = gender,
-                onValueChange = { gender = it },
-                label = { Text("Gênero") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Button(onClick = { /* TODO: Implementar ação de envio */ }) {
-                    Text("Enviar")
-                }
-                Button(onClick = { /* TODO: Implementar ação de cancelar */ }) {
-                    Text("Cancelar")
-                }
+            Column {
+                Text(text = task.name, style = MaterialTheme.typography.titleSmall)
+                Text(text = task.date, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
+
+    data class Task(val name: String, val date: String)
 
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
         MyApp {
-            RegisterForm()
+            TaskListScreen()
         }
     }
 }

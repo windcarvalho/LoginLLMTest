@@ -6,10 +6,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -18,8 +23,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Checkbox
 //import androidx.compose.ui.semantics.SemanticsProperties.ImeAction
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -31,134 +38,101 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cadastrollmtest.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Suppress("DEPRECATION")
 class Tela_Compose_Access_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CadastroScreen({}, {})
+            val tasks = remember {
+                listOf(
+                    Task(1, "Comprar leite", "03/04/2024"),
+                    Task(2, "Ligar para o cliente", "05/04/2024"),
+                    Task(3, "Enviar relatório", "10/04/2024")
+                )
+            }
+            TaskListScreen(tasks = tasks)
         }
     }
 
+    data class Task(val id: Int, val taskName: String, val dueDate: String)
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun CadastroScreen(onCancel: () -> Unit, onEnviar: (CadastroData) -> Unit) {
-        var nome by remember { mutableStateOf("") }
-        var sobrenome by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var senha by remember { mutableStateOf("") }
-        var dataNascimento by remember { mutableStateOf("") }
-        var genero by remember { mutableStateOf("") }
-
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+    fun TaskListScreen(tasks: List<Task>) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Lista de Tarefas") }
+                )
+            }
         ) {
-            TextField(
-                value = nome,
-                onValueChange = { nome = it },
-                label = { Text("Nome") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
-            )
+            TaskList(tasks = tasks)
+        }
+    }
+    @Composable
+    fun TaskList(tasks: List<Task>) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(tasks) { task ->
+                TaskListItem(task = task)
+            }
+        }
+    }
 
-            TextField(
-                value = sobrenome,
-                onValueChange = { sobrenome = it },
-                label = { Text("Sobrenome") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
-            )
-
-            TextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("E-mail") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Email,
-                    imeAction = ImeAction.Next
-                )
-            )
-
-            TextField(
-                value = senha,
-                onValueChange = { senha = it },
-                label = { Text("Senha") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Next
-                )
-            )
-
-            TextField(
-                value = dataNascimento,
-                onValueChange = { dataNascimento = it },
-                label = { Text("Data de Nascimento") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                )
-            )
-
-            TextField(
-                value = genero,
-                onValueChange = { genero = it },
-                label = { Text("Gênero") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+    @Composable
+    fun TaskListItem(task: Task) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
             ) {
-                Button(onClick = onCancel) {
-                    Text("Cancelar")
-                }
-                Button(onClick = { onEnviar(CadastroData(nome, sobrenome, email, senha, dataNascimento, genero)) }) {
-                    Text("Enviar")
+                Text(
+                    text = task.taskName,
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .padding(bottom = 4.dp)
+                        .semantics { contentDescription = "Nome da tarefa: ${task.taskName}" }
+                )
+                Text(
+                    text = "Data de Vencimento: ${task.dueDate}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.Gray,
+                    modifier = Modifier
+                        .padding(bottom = 4.dp)
+                        .semantics { contentDescription = "Data de vencimento: ${task.dueDate}" }
+                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Checkbox(
+                        checked = false,
+                        onCheckedChange = { /* TODO: Handle checkbox state */ },
+                        modifier = Modifier
+                            .padding(end = 8.dp)
+                            .semantics { contentDescription = "Concluída" }
+                    )
+                    Text(
+                        text = "Concluída",
+                        modifier = Modifier.semantics { contentDescription = "Checkbox para marcar a tarefa como concluída" }
+                    )
                 }
             }
         }
     }
 
-
-    data class CadastroData(
-        val nome: String,
-        val sobrenome: String,
-        val email: String,
-        val senha: String,
-        val dataNascimento: String,
-        val genero: String
-    )
-
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
         MaterialTheme {
-            CadastroScreen({}, {})
+            Tela_Compose_1()
         }
     }}

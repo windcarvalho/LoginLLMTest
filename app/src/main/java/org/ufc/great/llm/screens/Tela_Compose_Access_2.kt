@@ -6,9 +6,14 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -21,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role.Companion.Checkbox
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,114 +38,73 @@ class Tela_Compose_Access_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CadastroScreen()
+            TaskListScreen(
+                tasks = listOf(
+                    Task("Comprar leite", "2024-04-05"),
+                    Task("Ligar para o médico", "2024-04-07"),
+                    Task("Fazer exercícios", "2024-04-10")
+                )
+            )
         }
     }
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun CadastroScreen() {
-        var nome by remember { mutableStateOf("") }
-        var sobrenome by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var senha by remember { mutableStateOf("") }
-        var dataNascimento by remember { mutableStateOf("") }
-        var genero by remember { mutableStateOf("") }
+    data class Task(val name: String, val date: String)
 
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = "Cadastro") },
-                    colors = TopAppBarDefaults.topAppBarColors()
+    @Composable
+    fun TaskListScreen(tasks: List<Task>) {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "Lista de Tarefas",
+                    style = MaterialTheme.typography.titleMedium
                 )
-            },
-            content = {
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                ) {
-                    TextField(
-                        value = nome,
-                        onValueChange = { nome = it },
-                        label = { Text("Nome") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp),
-                        colors = TextFieldDefaults.textFieldColors()
-                    )
-                    TextField(
-                        value = sobrenome,
-                        onValueChange = { sobrenome = it },
-                        label = { Text("Sobrenome") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp),
-                        colors = TextFieldDefaults.textFieldColors()
-                    )
-                    TextField(
-                        value = email,
-                        onValueChange = { email = it },
-                        label = { Text("E-mail") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp),
-                        colors = TextFieldDefaults.textFieldColors()
-                    )
-                    TextField(
-                        value = senha,
-                        onValueChange = { senha = it },
-                        label = { Text("Senha") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp),
-                        colors = TextFieldDefaults.textFieldColors()
-                    )
-                    TextField(
-                        value = dataNascimento,
-                        onValueChange = { dataNascimento = it },
-                        label = { Text("Data de Nascimento") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp),
-                        colors = TextFieldDefaults.textFieldColors()
-                    )
-                    TextField(
-                        value = genero,
-                        onValueChange = { genero = it },
-                        label = { Text("Gênero") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp),
-                        colors = TextFieldDefaults.textFieldColors()
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        Button(
-                            onClick = { /* implementar a lógica de envio */ },
-                            modifier = Modifier.padding(end = 16.dp)
-                        ) {
-                            Text("Enviar")
-                        }
-                        Button(
-                            onClick = { /* implementar a lógica de cancelamento */ },
-                            modifier = Modifier.padding(end = 16.dp)
-                        ) {
-                            Text("Cancelar")
-                        }
-                    }
-                }
+                Spacer(modifier = Modifier.height(16.dp))
+                TaskList(tasks = tasks)
             }
-        )
+        }
     }
+
+    @Composable
+    fun TaskList(tasks: List<Task>) {
+        LazyColumn {
+            items(tasks) { task ->
+                TaskListItem(task = task)
+            }
+        }
+    }
+
+    @Composable
+    fun TaskListItem(task: Task) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(vertical = 8.dp)
+        ) {
+            Checkbox(
+                checked = false,
+                onCheckedChange = { /*TODO*/ },
+//                contentDescription = "Concluir tarefa ${task.name}"
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                Text(
+                    text = task.name,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Black // Melhorando o contraste
+                )
+                Text(
+                    text = task.date,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.Gray // Melhorando o contraste
+                )
+            }
+        }
+    }
+
 
     @Preview
     @Composable
     fun PreviewCadastroScreen() {
-        CadastroScreen()
+        Tela_Compose_Access_2()
     }
-
-
 }
