@@ -1,11 +1,11 @@
 package org.ufc.great.llm.screens;
 
-public class Task {
+public class Task_Tela_1 {
     private String taskName;
     private String date;
     private boolean isChecked;
 
-    public Task(String taskName, String date) {
+    public Task_Tela_1(String taskName, String date) {
         this.taskName = taskName;
         this.date = date;
         this.isChecked = false;

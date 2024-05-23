@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.cadastrollmtest.R;
+
+import org.ufc.great.llm.screens.Adapters.TaskAdapter_Tela_2;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Tela_Access_2 extends AppCompatActivity {
     @Override
@@ -17,34 +23,16 @@ public class Tela_Access_2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_access_2);
 
-        EditText editTextFirstName = findViewById(R.id.editTextFirstName);
-        EditText editTextLastName = findViewById(R.id.editTextLastName);
-        EditText editTextEmail = findViewById(R.id.editTextEmail);
-        EditText editTextPassword = findViewById(R.id.editTextPassword);
-        EditText editTextDOB = findViewById(R.id.editTextDOB);
-        RadioGroup radioGroupGender = findViewById(R.id.radioGroupGender);
-        Button buttonSubmit = findViewById(R.id.buttonSubmit);
-        Button buttonCancel = findViewById(R.id.buttonCancel);
+        ArrayList<Task_Tela_2> tasks = new ArrayList<>();
+        tasks.add(new Task_Tela_2("Tarefa 1", "2024-04-03", false));
+        tasks.add(new Task_Tela_2("Tarefa 2", "2024-04-05", false));
+        tasks.add(new Task_Tela_2("Tarefa 3", "2024-04-04", false));
 
-        buttonSubmit.setOnClickListener(v -> {
-            String firstName = editTextFirstName.getText().toString().trim();
-            String lastName = editTextLastName.getText().toString().trim();
-            String email = editTextEmail.getText().toString().trim();
-            String password = editTextPassword.getText().toString().trim();
-            String dob = editTextDOB.getText().toString().trim();
+        Collections.sort(tasks, (task1, task2) -> task2.getDate().compareTo(task1.getDate()));
 
-            int selectedGenderId = radioGroupGender.getCheckedRadioButtonId();
-            RadioButton selectedGender = findViewById(selectedGenderId);
-            String gender = selectedGender != null ? selectedGender.getText().toString().trim() : "";
+        TaskAdapter_Tela_2 adapter = new TaskAdapter_Tela_2(this, tasks);
 
-            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || dob.isEmpty() || gender.isEmpty()) {
-                Toast.makeText(Tela_Access_2.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
-            } else {
-                // Aqui você pode fazer o que quiser com os dados, como enviá-los para um servidor
-                Toast.makeText(Tela_Access_2.this, "Cadastro enviado!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        buttonCancel.setOnClickListener(v -> finish());
+        ListView taskListView = findViewById(R.id.taskListView);
+        taskListView.setAdapter(adapter);
     }
 }

@@ -1,4 +1,4 @@
-package org.ufc.great.llm.screens;
+package org.ufc.great.llm.screens.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,17 +11,19 @@ import android.widget.TextView;
 
 import com.example.cadastrollmtest.R;
 
+import org.ufc.great.llm.screens.Task_Tela_1;
+
 import java.util.List;
 
-public class TaskAdapterAccess extends ArrayAdapter<Task> {
+public class TaskAdapterAccess_Tela_1 extends ArrayAdapter<Task_Tela_1> {
 
     private Context context;
-    private List<Task> tasks;
+    private List<Task_Tela_1> taskTela1s;
 
-    public TaskAdapterAccess(Context context, List<Task> tasks) {
-        super(context, R.layout.activity_tela_access_1_list_item_task, tasks);
+    public TaskAdapterAccess_Tela_1(Context context, List<Task_Tela_1> taskTela1s) {
+        super(context, R.layout.activity_tela_access_1_list_item_task, taskTela1s);
         this.context = context;
-        this.tasks = tasks;
+        this.taskTela1s = taskTela1s;
     }
 
     @Override
@@ -35,12 +37,12 @@ public class TaskAdapterAccess extends ArrayAdapter<Task> {
         CheckBox checkBox = view.findViewById(R.id.taskCheckBox);
 
         // Get the Task object for the current position
-        Task task = tasks.get(position);
+        Task_Tela_1 taskTela1 = taskTela1s.get(position);
 
         // Set the task text, date, and checked state
-        taskTextView.setText(task.getTaskName());
-        dateTextView.setText(task.getDate());
-        checkBox.setChecked(task.isChecked());
+        taskTextView.setText(taskTela1.getTaskName());
+        dateTextView.setText(taskTela1.getDate());
+        checkBox.setChecked(taskTela1.isChecked());
 
         // Return the view
         return view;

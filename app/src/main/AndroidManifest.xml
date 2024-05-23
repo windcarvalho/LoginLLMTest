@@ -17,7 +17,7 @@
             android:exported="false"
             android:theme="@style/Theme.LoginLLMTest" />
         <activity
-            android:name="org.ufc.great.llm.screens.TaskAdapter"
+            android:name="org.ufc.great.llm.screens.Adapters.TaskAdapter_Tela_1"
             android:exported="false" />
         <activity
             android:name="org.ufc.great.llm.screens.Tela_1"
