@@ -70,5 +70,9 @@
     <string name="title_activity_main">Formulário de Cadastro</string>
     <string name="button_submit">Enviar</string>
     <string name="button_cancel">Cancelar</string>
-
+    <string name="checkbox_description">Checkbox para marcar tarefa como concluída ou não</string>
+    <string name="task_description">Descrição da tarefa a ser realizada</string>
+    <string name="date_description">Data de conclusão da tarefa</string>
+    <string name="task_completed">Tarefa concluída</string>
+    <string name="task_not_completed">Tarefa não concluída</string>
 </resources>
