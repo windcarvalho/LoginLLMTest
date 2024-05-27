@@ -71,4 +71,27 @@
     <string name="button_submit">Enviar</string>
     <string name="button_cancel">Cancelar</string>
 
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
+
+    <string name="user_name_label">Nome do Usuário</string>
+    <!-- Outras informações do cabeçalho, se necessário -->
+
+    <!-- Rótulos dos itens do menu lateral -->
+    <string name="home_label">Página Inicial</string>
+    <string name="promotions_label">Promoções</string>
+    <string name="orders_label">Meus Pedidos</string>
+    <string name="cart_label">Meu Carrinho</string>
+    <string name="account_section_label">Conta</string>
+    <string name="account_label">Minha Conta</string>
+    <string name="logout_label">Sair</string>
+
+    <!-- Descrições de texto dos itens do menu lateral -->
+    <string name="home_description">Navegar para a Página Inicial</string>
+    <string name="promotions_description">Navegar para as Promoções</string>
+    <string name="orders_description">Navegar para Meus Pedidos</string>
+    <string name="cart_description">Navegar para Meu Carrinho</string>
+    <string name="account_description">Navegar para Minha Conta</string>
+    <string name="logout_description">Sair da Conta</string>
+
 </resources>

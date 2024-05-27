@@ -1,37 +1,60 @@
 package org.ufc.great.llm.screens;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cadastrollmtest.R;
+import com.google.android.material.navigation.NavigationView;
 
 public class Tela_Access_3 extends AppCompatActivity {
-    private EditText editTextName, editTextLastName; // Adicione outros campos conforme necessário
-    private Button buttonSubmit, buttonCancel;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_access_3);
 
-        // Inicialização dos componentes da interface
-        editTextName = findViewById(R.id.editTextName);
-        editTextLastName = findViewById(R.id.editTextLastName);
-        // Inicialize outros campos e botões conforme necessário
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
-        buttonSubmit = findViewById(R.id.buttonSubmit);
-        buttonCancel = findViewById(R.id.buttonCancel);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-        // Define os ouvintes de clique para os botões
-        buttonSubmit.setOnClickListener(view -> {
-            // Lógica para enviar o formulário
-        });
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        int id = item.getItemId();
 
-        buttonCancel.setOnClickListener(view -> {
-            // Lógica para cancelar o cadastro
-        });
+                        if (id == R.id.nav_home) {
+                            // Abrir Página Inicial
+                        } else if (id == R.id.nav_promotions) {
+                            // Abrir Promoções
+                        } else if (id == R.id.nav_orders) {
+                            // Abrir Meus Pedidos
+                        } else if (id == R.id.nav_cart) {
+                            // Abrir Meu Carrinho
+                        } else if (id == R.id.nav_account) {
+                            // Abrir Minha Conta
+                        } else if (id == R.id.nav_logout) {
+                            // Executar Logout
+                        }
+
+                        drawer.closeDrawers();
+                        return true;
+                    }
+                });
     }
 }
