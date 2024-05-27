@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.cadastrollmtest.R;
+import com.example.listadetarefasllmtest.R;
 
 import org.ufc.great.llm.screens.Adapters.TaskAdapterAccess_Tela_3;
 

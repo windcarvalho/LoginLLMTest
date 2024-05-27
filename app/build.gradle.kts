@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cadastrollmtest"
+    namespace = "com.example.listadetarefasllmtest"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.cadastrollmtest"
+        applicationId = "com.example.listadetarefasllmtest"
         minSdk = 29
         targetSdk = 34
         versionCode = 1

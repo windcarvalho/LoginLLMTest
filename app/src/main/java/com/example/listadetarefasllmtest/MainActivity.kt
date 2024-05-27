@@ -1,4 +1,4 @@
-package com.example.cadastrollmtest
+package com.example.listadetarefasllmtest
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

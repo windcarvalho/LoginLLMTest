@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cadastrollmtest.R
-import org.ufc.great.llm.screens.Task
+import com.example.listadetarefasllmtest.R
 
 data class Task_CL_1(var task: String, var date: String, var isChecked: Boolean)
 

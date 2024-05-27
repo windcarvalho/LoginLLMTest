@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.cadastrollmtest.R;
+import com.example.listadetarefasllmtest.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

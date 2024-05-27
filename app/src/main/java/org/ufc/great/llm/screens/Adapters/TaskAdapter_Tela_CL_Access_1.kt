@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cadastrollmtest.R
+import com.example.listadetarefasllmtest.R
 
 
 data class Task_CL_Access(val task: String, val date: String, var isChecked: Boolean)

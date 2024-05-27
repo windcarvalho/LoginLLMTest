@@ -3,14 +3,9 @@ package org.ufc.great.llm.screens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.example.cadastrollmtest.R;
+import com.example.listadetarefasllmtest.R;
 
 import org.ufc.great.llm.screens.Adapters.TaskAdapter_Tela_2;
 

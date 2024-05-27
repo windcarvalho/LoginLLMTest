@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.cadastrollmtest.R;
+import com.example.listadetarefasllmtest.R;
 
 import org.ufc.great.llm.screens.Task_Tela_3;
 

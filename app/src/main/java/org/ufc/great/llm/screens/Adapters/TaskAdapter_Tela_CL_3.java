@@ -9,9 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cadastrollmtest.R;
+import com.example.listadetarefasllmtest.R;
 
-import org.ufc.great.llm.screens.Task_CL_2;
 import org.ufc.great.llm.screens.Task_CL_3;
 
 import java.util.List;

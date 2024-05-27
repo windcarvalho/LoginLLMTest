@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.cadastrollmtest.R;
+import com.example.listadetarefasllmtest.R;
 
 import org.ufc.great.llm.screens.Task_Tela_1;
 

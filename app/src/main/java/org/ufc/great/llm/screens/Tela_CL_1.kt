@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cadastrollmtest.R
+import com.example.listadetarefasllmtest.R
 import org.ufc.great.llm.screens.Adapters.TaskAdapter_Tela_CL_1
 import org.ufc.great.llm.screens.Adapters.Task_CL_1
 

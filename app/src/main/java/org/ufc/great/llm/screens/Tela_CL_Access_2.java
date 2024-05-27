@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.cadastrollmtest.R;
-
 public class Tela_CL_Access_2 extends AppCompatActivity {
 
     @Override
