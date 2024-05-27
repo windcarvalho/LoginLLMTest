@@ -1,4 +1,4 @@
-package com.example.cadastrollmtest.ui.theme
+package com.example.menulateralllmtest.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

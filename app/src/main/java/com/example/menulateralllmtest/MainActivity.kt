@@ -1,4 +1,4 @@
-package com.example.cadastrollmtest
+package com.example.menulateralllmtest
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

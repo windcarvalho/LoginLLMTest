@@ -8,12 +8,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-import com.example.cadastrollmtest.R;
+
+import com.example.menulateralllmtest.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class Tela_2 extends AppCompatActivity {

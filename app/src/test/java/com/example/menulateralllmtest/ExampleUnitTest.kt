@@ -1,4 +1,4 @@
-package com.example.cadastrollmtest
+package com.example.menulateralllmtest
 
 import org.junit.Test
 

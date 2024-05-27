@@ -7,10 +7,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.example.cadastrollmtest.R;
+import com.example.menulateralllmtest.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class Tela_3 extends AppCompatActivity {
