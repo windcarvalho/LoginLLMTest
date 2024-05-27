@@ -5,12 +5,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
@@ -18,6 +25,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 //import androidx.compose.ui.semantics.SemanticsProperties.ImeAction
@@ -28,137 +39,123 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.cadastrollmtest.R
 
 @Suppress("DEPRECATION")
 class Tela_Compose_Access_1 : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CadastroScreen({}, {})
+            App()
         }
     }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
+    @ExperimentalMaterial3Api
     @Composable
-    fun CadastroScreen(onCancel: () -> Unit, onEnviar: (CadastroData) -> Unit) {
-        var nome by remember { mutableStateOf("") }
-        var sobrenome by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var senha by remember { mutableStateOf("") }
-        var dataNascimento by remember { mutableStateOf("") }
-        var genero by remember { mutableStateOf("") }
+    fun App() {
+        var isMenuOpen by remember { mutableStateOf(false) }
+
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = "App") },
+                    navigationIcon = {
+                        IconButton(
+                            onClick = { isMenuOpen = true },
+                            content = {
+                                Icon(Icons.Filled.Menu, contentDescription = "Abrir menu")
+                            }
+                        )
+                    }
+                )
+            },
+            content = {
+                SideMenu(
+                    isOpen = isMenuOpen,
+                    onClose = { isMenuOpen = false },
+                    onItemClick = {
+                        // Lidar com os cliques nos itens do menu aqui
+                        when (it) {
+                            "Página Inicial" -> { /* Navegar para a página inicial */ }
+                            "Promoções" -> { /* Navegar para a página de promoções */ }
+                            "Meus Pedidos" -> { /* Navegar para a página de pedidos */ }
+                            "Meu Carrinho" -> { /* Navegar para o carrinho */ }
+                            "Minha Conta" -> { /* Navegar para a página da conta */ }
+                            "Sair" -> { /* Implementar a lógica para sair da conta */ }
+                        }
+                        isMenuOpen = false
+                    }
+                )
+            }
+        )
+    }
+
+    @Composable
+    fun SideMenu(
+        isOpen: Boolean,
+        onClose: () -> Unit,
+        onItemClick: (String) -> Unit
+    ) {
+        val items = listOf(
+            "Página Inicial",
+            "Promoções",
+            "Meus Pedidos",
+            "Meu Carrinho",
+            "Minha Conta",
+            "Sair"
+        )
 
         Column(
             modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
                 .padding(16.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .width(250.dp)
+                .offset { IntOffset(if (isOpen) 0 else -250, 0) }
         ) {
-            TextField(
-                value = nome,
-                onValueChange = { nome = it },
-                label = { Text("Nome") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
-            )
-
-            TextField(
-                value = sobrenome,
-                onValueChange = { sobrenome = it },
-                label = { Text("Sobrenome") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
-            )
-
-            TextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("E-mail") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Email,
-                    imeAction = ImeAction.Next
+            items.forEach { item ->
+                MenuItem(
+                    isOpen = isOpen,
+                    text = item,
+                    onClick = { onItemClick(item) }
                 )
-            )
-
-            TextField(
-                value = senha,
-                onValueChange = { senha = it },
-                label = { Text("Senha") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Next
-                )
-            )
-
-            TextField(
-                value = dataNascimento,
-                onValueChange = { dataNascimento = it },
-                label = { Text("Data de Nascimento") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                )
-            )
-
-            TextField(
-                value = genero,
-                onValueChange = { genero = it },
-                label = { Text("Gênero") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Button(onClick = onCancel) {
-                    Text("Cancelar")
-                }
-                Button(onClick = { onEnviar(CadastroData(nome, sobrenome, email, senha, dataNascimento, genero)) }) {
-                    Text("Enviar")
-                }
             }
         }
     }
 
+    @Composable
+    fun MenuItem(
+        isOpen: Boolean,
+        text: String,
+        onClick: () -> Unit
+    ) {
+        val focusRequester = remember { FocusRequester() }
 
-    data class CadastroData(
-        val nome: String,
-        val sobrenome: String,
-        val email: String,
-        val senha: String,
-        val dataNascimento: String,
-        val genero: String
-    )
+        TextButton(
+            onClick = onClick,
+            modifier = Modifier
+                .padding(8.dp)
+                .focusRequester(focusRequester)
+                .onGloballyPositioned { coordinates ->
+                    if (text == "Página Inicial" && coordinates != null && isOpen) {
+                        focusRequester.requestFocus()
+                    }
+                }
+        ) {
+            Text(text = text)
+        }
+    }
 
+
+    @OptIn(ExperimentalMaterial3Api::class)
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
         MaterialTheme {
-            CadastroScreen({}, {})
+            App()
         }
     }}

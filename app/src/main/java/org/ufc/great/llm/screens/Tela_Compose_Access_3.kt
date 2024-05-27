@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -33,102 +35,74 @@ class Tela_Compose_Access_3<VisualTransformation> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp {
-                RegisterForm()
+            MaterialTheme {
+                MainScreen()
             }
         }
     }
 }
 
 @Composable
-fun MyApp(content: @Composable () -> Unit) {
-    MaterialTheme {
-        Surface(color = MaterialTheme.colorScheme.background) {
-            content()
-        }
-    }
+fun MenuItem(
+    text: String,
+    onClick: () -> Unit
+) {
+    Text(
+        text = text
+    )
 }
 
 @Composable
-fun RegisterForm() {
-    var name by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var dob by remember { mutableStateOf("") }
-    var gender by remember { mutableStateOf("") }
+fun SectionHeader(text: String) {
+    Text(
+        text = text
+    )
+}
 
+@Composable
+fun Drawer(
+    onMenuItemClick: (String) -> Unit
+) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Top
     ) {
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Nome") },
-            modifier = Modifier.fillMaxWidth()
-        )
+        // Seção de navegação
+        SectionHeader(text = "Navegação")
+        MenuItem(text = "Página Inicial", onClick = { onMenuItemClick("Página Inicial") })
+        MenuItem(text = "Promoções", onClick = { onMenuItemClick("Promoções") })
+        MenuItem(text = "Meus Pedidos", onClick = { onMenuItemClick("Meus Pedidos") })
+        MenuItem(text = "Meu Carrinho", onClick = { onMenuItemClick("Meu Carrinho") })
 
-        OutlinedTextField(
-            value = lastName,
-            onValueChange = { lastName = it },
-            label = { Text("Sobrenome") },
-            modifier = Modifier.fillMaxWidth()
-        )
+        // Divisor
+        Divider()
 
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("E-mail") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Senha") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = dob,
-            onValueChange = { dob = it },
-            label = { Text("Data de Nascimento") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = gender,
-            onValueChange = { gender = it },
-            label = { Text("Gênero") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Button(onClick = { /* TODO: Implementar ação de envio */ }) {
-                Text("Enviar")
-            }
-            Button(onClick = { /* TODO: Implementar ação de cancelar */ }) {
-                Text("Cancelar")
-            }
-        }
+        // Seção de conta
+        SectionHeader(text = "Conta")
+        MenuItem(text = "Minha Conta", onClick = { onMenuItemClick("Minha Conta") })
+        MenuItem(text = "Sair", onClick = { onMenuItemClick("Sair") })
     }
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+fun MainScreen() {
+    var selectedItem by remember { mutableStateOf("") }
+
+    Scaffold(
+        content = {
+            // Conteúdo principal da tela
+            // Aqui você colocaria o conteúdo da tela principal da sua aplicação
+            Text("Conteúdo principal da tela: $selectedItem")
+            Drawer(onMenuItemClick = { selectedItem = it })
+        }
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MyApp {
-        RegisterForm()
+    MaterialTheme {
+        MainScreen()
     }
 }
