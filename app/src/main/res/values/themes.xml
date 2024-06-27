@@ -7,4 +7,6 @@
         <!-- Customize your light theme here. -->
 
     </style>
+
+    <style name="Theme.MenuLateralLLMTest" parent="Theme.AppCompat.DayNight.DarkActionBar" />
 </resources>
