@@ -18,8 +18,6 @@ import com.google.android.material.navigation.NavigationView;
 public class Tela_2 extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private ActionBarDrawerToggle toggle;
-    private AppBarConfiguration appBarConfiguration;
     private Toolbar toolbar;
 
     @Override
@@ -28,20 +26,11 @@ public class Tela_2 extends AppCompatActivity {
         setContentView(R.layout.activity_tela_2);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view_tela_2);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Configuração do Navigation Drawer
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_tela_2);
-
-
-        //inicio_teste
-        appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_promotions, R.id.nav_orders, R.id.nav_cart,
-                R.id.nav_account, R.id.nav_logout)
-                .setDrawerLayout(drawerLayout)
-                .build();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_promotions, R.id.nav_orders, R.id.nav_cart,
@@ -49,12 +38,12 @@ public class Tela_2 extends AppCompatActivity {
                 .setDrawerLayout(drawerLayout)
                 .build();
 
-        NavigationUI.setupActionBarWithNavController(this, Navigation.findNavController(this, R.id.nav_host_fragment_tela_2), appBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, Navigation.findNavController(this, R.id.nav_host_fragment_tela_2));
+//        NavigationUI.setupActionBarWithNavController(this, Navigation.findNavController(this, R.id.nav_host_fragment_tela_2), appBarConfiguration);
+//        NavigationUI.setupWithNavController(navigationView, Navigation.findNavController(this, R.id.nav_host_fragment_tela_2));
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_host_fragment_tela_2), drawerLayout);
+        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_tela_2), drawerLayout);
     }
 }

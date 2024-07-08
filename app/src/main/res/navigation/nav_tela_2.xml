@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_tela_2"
+    app:startDestination="@id/nav_home">
+
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.menulateralllmtest.FirstFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_first" />
+
+    <!-- Fragment for Promotions -->
+    <fragment
+        android:id="@+id/nav_promotions"
+        android:name="com.example.menulateralllmtest.FirstFragment"
+        android:label="Promotions"
+        tools:layout="@layout/fragment_first" />
+
+    <!-- Fragment for Orders -->
+    <fragment
+        android:id="@+id/nav_orders"
+        android:name="com.example.menulateralllmtest.FirstFragment"
+        android:label="Orders"
+        tools:layout="@layout/fragment_first" />
+
+    <!-- Fragment for Cart -->
+    <fragment
+        android:id="@+id/nav_cart"
+        android:name="com.example.menulateralllmtest.FirstFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_first" />
+
+    <!-- Fragment for Account -->
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.example.menulateralllmtest.FirstFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_first" />
+
+    <!-- Action for Logout -->
+    <action
+        android:id="@+id/nav_logout"
+        app:destination="@id/SecondFragment"/>
+
+</navigation>
