@@ -2,6 +2,7 @@ package org.ufc.great.llm.screens;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,12 +16,15 @@ import com.google.android.material.navigation.NavigationView;
 public class Tela_Access_2 extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private ActionBarDrawerToggle toggle;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_access_2);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -32,8 +36,8 @@ public class Tela_Access_2 extends AppCompatActivity {
                 .setDrawerLayout(drawerLayout)
                 .build();
 
-        NavigationUI.setupActionBarWithNavController(this, Navigation.findNavController(this, R.id.nav_view), appBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, Navigation.findNavController(this, R.id.nav_view));
+//        NavigationUI.setupActionBarWithNavController(this, Navigation.findNavController(this, R.id.nav_view), appBarConfiguration);
+//        NavigationUI.setupWithNavController(navigationView, Navigation.findNavController(this, R.id.nav_view));
     }
 
     @Override
