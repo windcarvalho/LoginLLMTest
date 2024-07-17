@@ -20,6 +20,7 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -41,43 +42,16 @@ class Tela_Compose_2 : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MyApp() {
         val drawerState = rememberDrawerState(DrawerValue.Closed)
         val scope = rememberCoroutineScope()
-        val openDrawer = {
-            scope.launch {
-                drawerState.open()
-            }
-        }
 
-        val closeDrawer = {
-            scope.launch {
-                drawerState.close()
-            }
-        }
-
-        val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-            // Handle the result of the document picker
-        }
-
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("App") },
-                    navigationIcon = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
-                            contentDescription = "Menu"
-                        )
-                    }
-                )
-            },
-            content = {
-                // Main content of your app
-                Drawer(drawerState = drawerState) { menuItem ->
+        ModalNavigationDrawer(
+            drawerState = drawerState,
+            drawerContent = {
+                DrawerContent(onMenuItemClick = { menuItem ->
                     // Handle menu item click here
                     when (menuItem) {
                         "Página Inicial" -> { /* Implement your logic here */ }
@@ -87,56 +61,58 @@ class Tela_Compose_2 : AppCompatActivity() {
                         "Minha Conta" -> { /* Implement your logic here */ }
                         "Sair" -> { /* Implement your logic here */ }
                     }
-                    closeDrawer()
+                    scope.launch {
+                        drawerState.close()
+                    }
+                })
+            },
+            content = {
+                // Main content of your app
+                Column(modifier = Modifier.fillMaxSize()) {
+                    TopAppBar(
+                        title = { Text("App") },
+                        navigationIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_launcher_background),
+                                contentDescription = "Menu",
+                                modifier = Modifier.clickable { scope.launch { drawerState.open() } }
+                            )
+                        }
+                    )
                 }
             }
         )
     }
 
     @Composable
-    fun Drawer(
-        drawerState: DrawerState,
+    fun DrawerContent(
         onMenuItemClick: (String) -> Unit
     ) {
-        val xOffset by animateFloatAsState(
-            targetValue = if (drawerState.isOpen) 0f else (-300).toFloat(),
-            animationSpec = spring()
-        )
-
-        val backgroundColor = MaterialTheme.colorScheme.surface
-
-        Surface(
-            modifier = Modifier
-                .offset(x = Dp(xOffset))
-                .fillMaxSize(),
-            color = backgroundColor
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.Start
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.Start
-            ) {
-                Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-                Text(
-                    text = "Menu",
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(16.dp)
-                )
+            Text(
+                text = "Menu",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(16.dp)
+            )
 
-                Divider(color = Color.LightGray, modifier = Modifier.fillMaxWidth())
+            Divider(color = Color.LightGray, modifier = Modifier.fillMaxWidth())
 
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    item {
-                        MenuItem(text = "Página Inicial") { onMenuItemClick("Página Inicial") }
-                        MenuItem(text = "Promoções") { onMenuItemClick("Promoções") }
-                        MenuItem(text = "Meus Pedidos") { onMenuItemClick("Meus Pedidos") }
-                        MenuItem(text = "Meu Carrinho") { onMenuItemClick("Meu Carrinho") }
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                item {
+                    MenuItem(text = "Página Inicial") { onMenuItemClick("Página Inicial") }
+                    MenuItem(text = "Promoções") { onMenuItemClick("Promoções") }
+                    MenuItem(text = "Meus Pedidos") { onMenuItemClick("Meus Pedidos") }
+                    MenuItem(text = "Meu Carrinho") { onMenuItemClick("Meu Carrinho") }
 
-                        Divider(color = Color.LightGray, modifier = Modifier.fillMaxWidth())
+                    Divider(color = Color.LightGray, modifier = Modifier.fillMaxWidth())
 
-                        MenuItem(text = "Minha Conta") { onMenuItemClick("Minha Conta") }
-                        MenuItem(text = "Sair") { onMenuItemClick("Sair") }
-                    }
+                    MenuItem(text = "Minha Conta") { onMenuItemClick("Minha Conta") }
+                    MenuItem(text = "Sair") { onMenuItemClick("Sair") }
                 }
             }
         }
@@ -155,7 +131,6 @@ class Tela_Compose_2 : AppCompatActivity() {
                 .clickable(onClick = onClick)
         )
     }
-
 
     @Preview
     @Composable
