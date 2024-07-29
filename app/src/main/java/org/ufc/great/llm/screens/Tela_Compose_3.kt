@@ -4,107 +4,161 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import java.time.LocalDate
 
 class Tela_Compose_3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp {
-                TaskListScreen()
+            ToDoListTheme {
+                ToDoListScreen()
             }
         }
     }
 
-    @Composable
-    fun MyApp(content: @Composable () -> Unit) {
-        MaterialTheme {
-            Surface(color = MaterialTheme.colorScheme.background) {
-                TaskListScreen()
-            }
-        }
-    }
-
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun TaskListScreen() {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("Lista de Tarefas") }
-                )
-            },
-            content = {
-                TaskList()
-            }
-        )
-    }
+    data class Task(val description: String, val date: LocalDate, var isChecked: Boolean = false)
 
     @Composable
-    fun TaskList() {
-        val tasks = remember {
-            mutableStateOf(
-                listOf(
-                    Task("Fazer compras", "2024-04-05"),
-                    Task("Estudar para o exame", "2024-04-04"),
-                    Task("Pagar contas", "2024-04-03")
-                )
+    fun TaskItem(task: Task) {
+        var checkedState by remember { mutableStateOf(task.isChecked) }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                Text(text = task.description, style = MaterialTheme.typography.bodySmall)
+                Text(text = task.date.toString(), style = MaterialTheme.typography.bodyMedium)
+            }
+            Checkbox(
+                checked = checkedState,
+                onCheckedChange = { isChecked ->
+                    checkedState = isChecked
+                    task.isChecked = isChecked
+                }
             )
         }
+    }
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            items(tasks.value) { task ->
+    @Composable
+    fun TaskList(tasks: List<Task>) {
+        LazyColumn {
+            items(tasks) { task ->
                 TaskItem(task = task)
             }
         }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
-    fun TaskItem(task: Task) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Checkbox(
-                checked = false,
-                onCheckedChange = { /* TODO: Implementar lógica de marcado */ },
-                modifier = Modifier.padding(end = 16.dp)
-            )
-            Column {
-                Text(text = task.name, style = MaterialTheme.typography.titleSmall)
-                Text(text = task.date, style = MaterialTheme.typography.bodySmall)
+    fun ToDoListScreen() {
+        val tasks = remember {
+            mutableStateListOf(
+                Task(description = "Buy groceries", date = LocalDate.now().minusDays(1)),
+                Task(description = "Call the bank", date = LocalDate.now().minusDays(2)),
+                Task(description = "Finish homework", date = LocalDate.now().minusDays(3))
+            ).apply { sortByDescending { it.date } }
+        }
+
+        Scaffold(
+            topBar = {
+                TopAppBar(title = { Text(text = "To-Do List") })
             }
+        ) {
+            TaskList(tasks = tasks)
         }
     }
-
-    data class Task(val name: String, val date: String)
 
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        MyApp {
-            TaskListScreen()
+        ToDoListTheme {
+            ToDoListScreen()
         }
     }
+
+    private val DarkColorPalette = darkColorScheme(
+        primary = Color(0xFFBB86FC),
+        onSurfaceVariant = Color(0xFF3700B3),
+        secondary = Color(0xFF03DAC5)
+    )
+
+    private val LightColorPalette = lightColorScheme(
+        primary = Color(0xFF6200EE),
+        onSurfaceVariant = Color(0xFF3700B3),
+        secondary = Color(0xFF03DAC5)
+    )
+
+    @Composable
+    fun ToDoListTheme(
+        darkTheme: Boolean = isSystemInDarkTheme(),
+        content: @Composable () -> Unit
+    ) {
+        val colors = if (darkTheme) {
+            DarkColorPalette
+        } else {
+            LightColorPalette
+        }
+
+        MaterialTheme(
+            colorScheme = colors,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
+        )
+    }
+
+    val Typography = Typography (
+        bodySmall = TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
+        ),
+        bodyMedium = TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Normal,
+            fontSize = 14.sp
+        )
+    )
+
+    val Shapes = Shapes(
+        small = RoundedCornerShape(4.dp),
+        medium = RoundedCornerShape(4.dp),
+        large = RoundedCornerShape(0.dp)
+    )
+
+    val Purple200 = Color(0xFFBB86FC)
+    val Purple500 = Color(0xFF6200EE)
+    val Purple700 = Color(0xFF3700B3)
+    val Teal200 = Color(0xFF03DAC5)
 }
