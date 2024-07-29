@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.cadastrollmtest.R;
+import com.example.cadastrollmtestgpt4.R;
 
 public class Tela_Access_3 extends AppCompatActivity {
     private EditText editTextName, editTextLastName; // Adicione outros campos conforme necessário

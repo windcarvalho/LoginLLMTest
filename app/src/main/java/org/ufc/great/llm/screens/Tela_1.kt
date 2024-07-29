@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
-import com.example.cadastrollmtest.R
+import com.example.cadastrollmtestgpt4.R
 
 class Tela_1 : AppCompatActivity() {
 

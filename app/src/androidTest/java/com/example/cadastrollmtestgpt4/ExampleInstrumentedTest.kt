@@ -1,4 +1,4 @@
-package com.example.cadastrollmtest
+package com.example.cadastrollmtestgpt4
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

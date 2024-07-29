@@ -26,7 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
-import com.example.cadastrollmtest.R
+import com.example.cadastrollmtestgpt4.R
 import com.google.type.Date
 
 class Tela_Compose_Access_3<VisualTransformation> : AppCompatActivity() {

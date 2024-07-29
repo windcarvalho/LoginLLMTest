@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.cadastrollmtest.R
+import com.example.cadastrollmtestgpt4.R
 
 @Suppress("DEPRECATION")
 class Tela_Compose_Access_1 : ComponentActivity() {

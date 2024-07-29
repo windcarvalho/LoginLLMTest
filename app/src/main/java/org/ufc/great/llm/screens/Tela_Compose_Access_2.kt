@@ -25,7 +25,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.example.cadastrollmtest.R
+import com.example.cadastrollmtestgpt4.R
 
 @Suppress("DEPRECATION")
 class Tela_Compose_Access_2 : AppCompatActivity() {

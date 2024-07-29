@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CadastroLLMTest"
+rootProject.name = "CadastroLLMTestGPT4"
 include(":app")

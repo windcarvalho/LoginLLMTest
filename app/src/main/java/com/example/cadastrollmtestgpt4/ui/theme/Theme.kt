@@ -1,4 +1,4 @@
-package com.example.cadastrollmtest.ui.theme
+package com.example.cadastrollmtestgpt4.ui.theme
 
 import android.app.Activity
 import android.os.Build
