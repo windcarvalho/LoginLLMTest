@@ -15,73 +15,89 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Suppress("DEPRECATION")
 class Tela_Compose_Access_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TaskListScreen(
-                tasks = listOf(
-                    Task("Comprar leite", "2024-04-05"),
-                    Task("Ligar para o médico", "2024-04-07"),
-                    Task("Fazer exercícios", "2024-04-10")
-                )
-            )
+            TaskListScreen()
         }
     }
-    data class Task(val name: String, val date: String)
+
+    data class Task(
+        val id: Int,
+        val description: String,
+        val date: Date,
+        var isChecked: Boolean
+    )
 
     @Composable
-    fun TaskListScreen(tasks: List<Task>) {
-        Surface(color = MaterialTheme.colorScheme.background) {
+    fun TaskListScreen() {
+        val tasks = remember {
+            mutableStateListOf(
+                Task(1, "Tarefa 1", Date(124, 6, 18), false),
+                Task(2, "Tarefa 2", Date(124, 6, 19), false),
+                Task(3, "Tarefa 3", Date(124, 6, 20), false)
+            ).sortedByDescending { it.date }
+        }
+
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            items(tasks) { task ->
+                TaskItem(task = task)
+            }
+        }
+    }
+
+    @Composable
+    fun TaskItem(task: Task) {
+        var isChecked by remember { mutableStateOf(task.isChecked) }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .semantics {
+                    contentDescription = "${task.description}, ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(task.date)}"
+                },
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Lista de Tarefas",
-                    style = MaterialTheme.typography.titleMedium
+                    text = task.description,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.semantics {
+                        contentDescription = "Tarefa: ${task.description}"
+                    }
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-                TaskList(tasks = tasks)
-            }
-        }
-    }
-
-    @Composable
-    fun TaskList(tasks: List<Task>) {
-        LazyColumn {
-            items(tasks) { task ->
-                TaskListItem(task = task)
-            }
-        }
-    }
-
-    @Composable
-    fun TaskListItem(task: Task) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(vertical = 8.dp)
-        ) {
-            Checkbox(
-                checked = false,
-                onCheckedChange = { /*TODO*/ },
-//                contentDescription = "Concluir tarefa ${task.name}"
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column {
                 Text(
-                    text = task.name,
+                    text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(task.date),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Black // Melhorando o contraste
-                )
-                Text(
-                    text = task.date,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray // Melhorando o contraste
+                    modifier = Modifier.semantics {
+                        contentDescription = "Data: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(task.date)}"
+                    }
                 )
             }
+            Checkbox(
+                checked = isChecked,
+                onCheckedChange = {
+                    isChecked = it
+                    task.isChecked = it
+                },
+                modifier = Modifier.semantics {
+                    contentDescription = if (isChecked) "Checkbox marcado" else "Checkbox desmarcado"
+                }
+            )
         }
     }
 
@@ -89,6 +105,6 @@ class Tela_Compose_Access_2 : AppCompatActivity() {
     @Preview
     @Composable
     fun PreviewCadastroScreen() {
-        Tela_Compose_Access_2()
+        TaskListScreen()
     }
 }
