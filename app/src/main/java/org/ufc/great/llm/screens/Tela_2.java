@@ -1,18 +1,15 @@
 package org.ufc.great.llm.screens;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
-import com.example.menulateralllmtest.R;
+import com.example.menulateralllmtestgpt4.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class Tela_2 extends AppCompatActivity {

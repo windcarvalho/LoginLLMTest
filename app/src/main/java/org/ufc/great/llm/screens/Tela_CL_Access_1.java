@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.menulateralllmtest.R;
+import com.example.menulateralllmtestgpt4.R;
 
 public class Tela_CL_Access_1 extends AppCompatActivity {
 

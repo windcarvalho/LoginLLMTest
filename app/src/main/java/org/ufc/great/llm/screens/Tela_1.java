@@ -6,12 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.menulateralllmtest.R;
+import com.example.menulateralllmtestgpt4.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class Tela_1 extends AppCompatActivity {

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.menulateralllmtest"
+    namespace = "com.example.menulateralllmtestgpt4"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.menulateralllmtest"
+        applicationId = "com.example.menulateralllmtestgp4"
         minSdk = 29
         targetSdk = 34
         versionCode = 1

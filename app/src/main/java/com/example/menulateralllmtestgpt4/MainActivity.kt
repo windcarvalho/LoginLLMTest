@@ -1,4 +1,4 @@
-package com.example.menulateralllmtest
+package com.example.menulateralllmtestgpt4
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

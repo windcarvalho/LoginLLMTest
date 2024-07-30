@@ -1,4 +1,4 @@
-package com.example.menulateralllmtest.ui.theme
+package com.example.menulateralllmtestgpt4.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

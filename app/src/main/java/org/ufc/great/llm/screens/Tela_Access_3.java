@@ -9,7 +9,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.menulateralllmtest.R;
+import com.example.menulateralllmtestgpt4.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class Tela_Access_3 extends AppCompatActivity {

@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MenuLateralLLMTest"
+rootProject.name = "MenuLateralLLMTestGPT4"
 include(":app")
