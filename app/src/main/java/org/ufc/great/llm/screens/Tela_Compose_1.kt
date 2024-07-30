@@ -6,119 +6,151 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.example.menulateralllmtestgpt4.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class Tela_Compose_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
-                App()
+            MyAppTheme {
+                MainScreen()
             }
         }
     }
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun App() {
-        var isMenuOpen by remember { mutableStateOf(false) }
+    fun MainScreen() {
+        val drawerState = rememberDrawerState(DrawerValue.Closed)
+        val scope = rememberCoroutineScope()
 
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = "App") },
-                    navigationIcon = {
-                        IconButton(onClick = { isMenuOpen = true }) {
-                            Icon(Icons.Filled.Menu, contentDescription = "Menu")
-                        }
-                    }
-                )
-            },
-            content = {
-                SideMenu(
-                    isOpen = isMenuOpen,
-                    onClose = { isMenuOpen = false },
-                    onItemClick = {
-                        // Handle menu item clicks here
-                        when (it) {
-                            "Página Inicial" -> { /* Navegar para a página inicial */ }
-                            "Promoções" -> { /* Navegar para a página de promoções */ }
-                            "Meus Pedidos" -> { /* Navegar para a página de pedidos */ }
-                            "Meu Carrinho" -> { /* Navegar para o carrinho */ }
-                            "Minha Conta" -> { /* Navegar para a página da conta */ }
-                            "Sair" -> { /* Implemente a lógica para sair da conta */ }
-                        }
-                        isMenuOpen = false
-                    }
-                )
+        ModalNavigationDrawer(
+            drawerState = drawerState,
+            drawerContent = {
+                DrawerContent(drawerState, scope)
             }
+        ) {
+            // Your main content goes here
+        }
+    }
+
+    @Composable
+    fun DrawerContent(drawerState: DrawerState, scope: CoroutineScope) {
+        Column {
+            DrawerSection("Navegação")
+            DrawerItem("Página Inicial", R.drawable.ic_launcher_background)
+            DrawerItem("Promoções", R.drawable.ic_launcher_background)
+            DrawerItem("Meus Pedidos", R.drawable.ic_launcher_background)
+            DrawerItem("Meu Carrinho", R.drawable.ic_launcher_background)
+
+            Divider()
+
+            DrawerSection("Conta")
+            DrawerItem("Minha Conta", R.drawable.ic_launcher_background)
+            DrawerItem("Sair", R.drawable.ic_launcher_background)
+        }
+    }
+
+    @Composable
+    fun DrawerSection(title: String) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier.padding(16.dp)
         )
     }
 
     @Composable
-    fun SideMenu(
-        isOpen: Boolean,
-        onClose: () -> Unit,
-        onItemClick: (String) -> Unit
-    ) {
-        val items = listOf("Página Inicial", "Promoções", "Meus Pedidos", "Meu Carrinho")
+    fun DrawerItem(text: String, icon: Int) {
+        val scaffoldState = rememberDrawerState(DrawerValue.Open)
+        val scope = rememberCoroutineScope()
 
-        Column(
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
-                .padding(16.dp)
-                .width(250.dp)
-                .offset { IntOffset(if (isOpen) 0 else -250, 0) }
+                .fillMaxWidth()
+                .clickable {
+                    // Handle item click
+                    scope.launch {
+                        scaffoldState.close()
+                    }
+                }
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            items.forEach { item ->
-                Text(
-                    text = item,
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .clickable { onItemClick(item) }
-                )
-            }
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
-            Text(
-                text = "Minha Conta",
-                modifier = Modifier
-                    .padding(8.dp)
-                    .clickable { onItemClick("Minha Conta") }
-            )
-            Text(
-                text = "Sair",
-                modifier = Modifier
-                    .padding(8.dp)
-                    .clickable { onItemClick("Sair") }
-            )
+            Icon(painter = painterResource(id = icon), contentDescription = null)
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = text, style = MaterialTheme.typography.bodySmall)
         }
     }
-
 
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        MaterialTheme {
-            App()
+        MyAppTheme {
+            MainScreen()
         }
     }
 
+    val Purple200 = Color(0xFFBB86FC)
+    val Purple500 = Color(0xFF6200EE)
+    val Purple700 = Color(0xFF3700B3)
+    val Teal200 = Color(0xFF03DAC5)
+
+    private val DarkColorPalette = darkColorScheme(
+        primary = Purple200,
+        onSurfaceVariant = Purple700,
+        secondary = Teal200
+    )
+
+    private val LightColorPalette = lightColorScheme(
+        primary = Purple500,
+        onSurfaceVariant = Purple700,
+        secondary = Teal200
+    )
+
+    @Composable
+    fun MyAppTheme(
+        darkTheme: Boolean = isSystemInDarkTheme(),
+        content: @Composable () -> Unit
+    ) {
+        val colors = if (darkTheme) {
+            DarkColorPalette
+        } else {
+            LightColorPalette
+        }
+
+        MaterialTheme(
+            colorScheme = colors,
+            typography = MaterialTheme.typography,
+            shapes = MaterialTheme.shapes,
+            content = content
+        )
+    }
 }
