@@ -6,13 +6,21 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.rememberDrawerState
@@ -21,6 +29,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.loginllmtestgpt4.R
@@ -31,106 +41,88 @@ class Tela_Compose_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyAppTheme {
-                MainScreen()
+            LoginScreenTheme {
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    LoginScreen()
+                }
             }
         }
     }
 
     @Composable
-    fun MainScreen() {
-        val drawerState = rememberDrawerState(DrawerValue.Closed)
-        val scope = rememberCoroutineScope()
+    fun LoginScreen() {
+        var username by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+        var passwordVisible by remember { mutableStateOf(false) }
 
-        ModalNavigationDrawer(
-            drawerState = drawerState,
-            drawerContent = {
-                DrawerContent(drawerState, scope)
-            }
-        ) {
-            // Your main content goes here
-        }
-    }
-
-    @Composable
-    fun DrawerContent(drawerState: DrawerState, scope: CoroutineScope) {
-        Column {
-            DrawerSection("Navegação")
-            DrawerItem("Página Inicial", R.drawable.ic_launcher_background)
-            DrawerItem("Promoções", R.drawable.ic_launcher_background)
-            DrawerItem("Meus Pedidos", R.drawable.ic_launcher_background)
-            DrawerItem("Meu Carrinho", R.drawable.ic_launcher_background)
-
-            Divider()
-
-            DrawerSection("Conta")
-            DrawerItem("Minha Conta", R.drawable.ic_launcher_background)
-            DrawerItem("Sair", R.drawable.ic_launcher_background)
-        }
-    }
-
-    @Composable
-    fun DrawerSection(title: String) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleSmall,
-            modifier = Modifier.padding(16.dp)
-        )
-    }
-
-    @Composable
-    fun DrawerItem(text: String, icon: Int) {
-        val scaffoldState = rememberDrawerState(DrawerValue.Open)
-        val scope = rememberCoroutineScope()
-
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    // Handle item click
-                    scope.launch {
-                        scaffoldState.close()
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            TextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text("Nome de usuário/e-mail") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            TextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Senha") },
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                modifier = Modifier.fillMaxWidth(),
+                trailingIcon = {
+                    val image = if (passwordVisible)
+                        Icons.Filled.Check
+                    else Icons.Filled.Clear
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(imageVector = image, contentDescription = null)
                     }
                 }
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(painter = painterResource(id = icon), contentDescription = null)
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(text = text, style = MaterialTheme.typography.bodySmall)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = { /* Implementar ação de login */ },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Entrar")
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            TextButton(onClick = { /* Implementar ação de recuperação de senha */ }) {
+                Text("Esqueceu a senha?")
+            }
         }
     }
 
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        MyAppTheme {
-            MainScreen()
+        LoginScreenTheme {
+            Surface(color = MaterialTheme.colorScheme.background) {
+                LoginScreen()
+            }
         }
     }
 
-    val Purple200 = Color(0xFFBB86FC)
-    val Purple500 = Color(0xFF6200EE)
-    val Purple700 = Color(0xFF3700B3)
-    val Teal200 = Color(0xFF03DAC5)
-
     private val DarkColorPalette = darkColorScheme(
-        primary = Purple200,
-        onSurfaceVariant = Purple700,
-        secondary = Teal200
+        primary = Color(0xFF1EB980),
+        onSurfaceVariant = Color(0xFF045D56),
+        secondary = Color(0xFF039BE5)
     )
 
     private val LightColorPalette = lightColorScheme(
-        primary = Purple500,
-        onSurfaceVariant = Purple700,
-        secondary = Teal200
+        primary = Color(0xFF1EB980),
+        onSurfaceVariant = Color(0xFF045D56),
+        secondary = Color(0xFF039BE5)
     )
 
     @Composable
-    fun MyAppTheme(
-        darkTheme: Boolean = isSystemInDarkTheme(),
-        content: @Composable () -> Unit
-    ) {
+    fun LoginScreenTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
         val colors = if (darkTheme) {
             DarkColorPalette
         } else {
@@ -139,8 +131,8 @@ class Tela_Compose_1 : ComponentActivity() {
 
         MaterialTheme(
             colorScheme = colors,
-            typography = MaterialTheme.typography,
-            shapes = MaterialTheme.shapes,
+            typography = Typography,
+            shapes = Shapes,
             content = content
         )
     }
