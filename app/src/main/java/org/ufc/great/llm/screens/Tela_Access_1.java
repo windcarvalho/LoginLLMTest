@@ -10,7 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.menulateralllmtestgpt4.R;
+import com.example.loginllmtestgpt4.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class Tela_Access_1 extends AppCompatActivity {

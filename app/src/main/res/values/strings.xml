@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MenuLateralLLMTestGPT4</string>
+    <string name="app_name">LoginLLMTestGPT4</string>
     <string name="title_activity_tela_login1">Tela_Cadastro1</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

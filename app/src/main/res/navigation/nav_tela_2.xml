@@ -8,35 +8,35 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.menulateralllmtestgpt4.FirstFragment"
+        android:name="com.example.loginllmtestgpt4.FirstFragment"
         android:label="Home"
         tools:layout="@layout/fragment_first" />
 
     <!-- Fragment for Promotions -->
     <fragment
         android:id="@+id/nav_promotions"
-        android:name="com.example.menulateralllmtestgpt4.FirstFragment"
+        android:name="com.example.loginllmtestgpt4.FirstFragment"
         android:label="Promotions"
         tools:layout="@layout/fragment_first" />
 
     <!-- Fragment for Orders -->
     <fragment
         android:id="@+id/nav_orders"
-        android:name="com.example.menulateralllmtestgpt4.FirstFragment"
+        android:name="com.example.loginllmtestgpt4.FirstFragment"
         android:label="Orders"
         tools:layout="@layout/fragment_first" />
 
     <!-- Fragment for Cart -->
     <fragment
         android:id="@+id/nav_cart"
-        android:name="com.example.menulateralllmtestgpt4.FirstFragment"
+        android:name="com.example.loginllmtestgpt4.FirstFragment"
         android:label="Cart"
         tools:layout="@layout/fragment_first" />
 
     <!-- Fragment for Account -->
     <fragment
         android:id="@+id/nav_account"
-        android:name="com.example.menulateralllmtestgpt4.FirstFragment"
+        android:name="com.example.loginllmtestgpt4.FirstFragment"
         android:label="Account"
         tools:layout="@layout/fragment_first" />
 

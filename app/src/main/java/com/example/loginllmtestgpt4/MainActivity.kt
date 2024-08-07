@@ -1,4 +1,4 @@
-package com.example.menulateralllmtestgpt4
+package com.example.loginllmtestgpt4
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

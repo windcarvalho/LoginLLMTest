@@ -2,7 +2,7 @@ package org.ufc.great.llm.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.menulateralllmtestgpt4.R
+import com.example.loginllmtestgpt4.R
 
 class Tela_CL_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

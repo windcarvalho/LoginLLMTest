@@ -1,4 +1,4 @@
-package com.example.menulateralllmtestgpt4
+package com.example.loginllmtestgpt4
 
 import org.junit.Test
 

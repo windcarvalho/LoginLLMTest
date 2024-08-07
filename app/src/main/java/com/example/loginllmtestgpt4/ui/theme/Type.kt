@@ -1,4 +1,4 @@
-package com.example.menulateralllmtestgpt4.ui.theme
+package com.example.loginllmtestgpt4.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
