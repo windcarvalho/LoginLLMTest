@@ -6,93 +6,152 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 
 class Tela_Compose_3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
-                MainScreen()
+            MyAppTheme {
+                MyApp()
             }
         }
-    }
-
-    @Composable
-    fun Drawer(
-        onMenuItemClick: (String) -> Unit
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Top
-        ) {
-            // Seção de navegação
-            SectionHeader(text = "Navegação")
-            MenuItem(text = "Página Inicial", onItemClick = { onMenuItemClick("Página Inicial") })
-            MenuItem(text = "Promoções", onItemClick = { onMenuItemClick("Promoções") })
-            MenuItem(text = "Meus Pedidos", onItemClick = { onMenuItemClick("Meus Pedidos") })
-            MenuItem(text = "Meu Carrinho", onItemClick = { onMenuItemClick("Meu Carrinho") })
-
-            // Divisor
-            Divider()
-
-            // Seção de conta
-            SectionHeader(text = "Conta")
-            MenuItem(text = "Minha Conta", onItemClick = { onMenuItemClick("Minha Conta") })
-            MenuItem(text = "Sair", onItemClick = { onMenuItemClick("Sair") })
-        }
-    }
-
-    @Composable
-    fun SectionHeader(text: String) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleSmall,
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-        )
     }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun MainScreen() {
-        var selectedItem by remember { mutableStateOf("") }
+    fun MyApp() {
+        val scaffoldState = rememberDrawerState(DrawerValue.Closed)
+        val coroutineScope = rememberCoroutineScope()
 
         Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("MyApp") },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            coroutineScope.launch {
+                                scaffoldState.open()
+                            }
+                        }) {
+                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                        }
+                    }
+                )
+            },
             content = {
-                // Conteúdo principal da tela
-                // Aqui você colocaria o conteúdo da tela principal da sua aplicação
-                Text("Conteúdo principal da tela: $selectedItem")
-                Drawer(onMenuItemClick = { selectedItem = it })
+                DrawerContent()
             }
         )
     }
 
     @Composable
-    fun MenuItem(
-        text: String,
-        onItemClick: () -> Unit
-    ) {
+    fun DrawerContent() {
+        Column {
+            DrawerSection("Navegação")
+            DrawerItem("Página Inicial")
+            DrawerItem("Promoções")
+            DrawerItem("Meus Pedidos")
+            DrawerItem("Meu Carrinho")
+            Divider(color = Color.Gray)
+            DrawerSection("Conta")
+            DrawerItem("Minha Conta")
+            DrawerItem("Sair")
+        }
+    }
+
+    @Composable
+    fun DrawerSection(title: String) {
         Text(
-            text = text,
+            text = title,
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+
+    @Composable
+    fun DrawerItem(label: String) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodySmall,
             modifier = Modifier
-                .clickable { onItemClick() }
+                .fillMaxWidth()
                 .padding(16.dp)
+                .clickable {
+                    // Ação ao clicar no item do menu
+                }
         )
     }
 
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        MaterialTheme {
-            MainScreen()
+        MyAppTheme {
+            MyApp()
         }
+    }
+
+    private val DarkColorPalette = darkColorScheme(
+        primary = Color(0xFF1EB980),
+        onSurfaceVariant = Color(0xFF045D56),
+        secondary = Color(0xFF1EB980)
+    )
+
+    private val LightColorPalette = lightColorScheme(
+        primary = Color(0xFF1EB980),
+        onSurfaceVariant = Color(0xFF045D56),
+        secondary = Color(0xFF1EB980)
+    )
+
+    val Shapes = Shapes(
+        small = RoundedCornerShape(4.dp),
+        medium = RoundedCornerShape(4.dp),
+        large = RoundedCornerShape(0.dp)
+    )
+
+    val Typography = Typography (
+        bodySmall = androidx.compose.ui.text.TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
+        )
+    )
+
+    @Composable
+    fun MyAppTheme(content: @Composable () -> Unit) {
+        val colors = LightColorPalette
+
+        MaterialTheme(
+            colorScheme = colors,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
+        )
     }
 }
