@@ -5,30 +5,47 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.produtogpt4llmtest.R
 
 class Tela_Compose_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProductDetailScreen(
-            )
+            ProductDetailsTheme {
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    ProductDetailScreen()
+                }
+            }
         }
     }
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -38,43 +55,113 @@ class Tela_Compose_1 : ComponentActivity() {
                 TopAppBar(
                     title = { Text(text = "Detalhes do Produto") }
                 )
-            }
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Aqui você incluirá os elementos da tela, como nome do produto, descrição, preço, imagem, botões de ação, etc.
-                Text(text = "Nome do Produto", style = MaterialTheme.typography.displayMedium)
-                Text(text = "Descrição do Produto", style = MaterialTheme.typography.displayMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
-                Text(text = "$10.99", style = MaterialTheme.typography.displayMedium)
-                Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = "Imagem do Produto",
-                    modifier = Modifier.size(200.dp)
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+            },
+            content = {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
                 ) {
-                    Button(onClick = { /* Ação ao clicar no botão Adicionar ao Carrinho */ }) {
-                        Text(text = "Adicionar ao Carrinho")
-                    }
-                    Button(onClick = { /* Ação ao clicar no botão Favoritos */ }) {
-                        Text(text = "Favoritos")
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        contentDescription = "Imagem do Produto",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "Nome do Produto",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Descrição detalhada do produto. Este texto deve fornecer informações abrangentes sobre o produto, incluindo seus principais recursos e benefícios.",
+                        fontSize = 16.sp
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Preço: R$ 199,99",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Button(
+                            onClick = { /*TODO: Adicionar ao carrinho*/ },
+                            shape = RoundedCornerShape(50)
+                        ) {
+                            Text(text = "Adicionar ao Carrinho")
+                        }
+                        Button(
+                            onClick = { /*TODO: Adicionar aos favoritos*/ },
+                            shape = RoundedCornerShape(50),
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+                        ) {
+                            Text(text = "Favoritar")
+                        }
                     }
                 }
             }
-        }
+        )
     }
+
 
     @Preview
     @Composable
     fun PreviewProductDetailScreen() {
         ProductDetailScreen()
+    }
+
+    private val DarkColorPalette = darkColorScheme(
+        primary = Color(0xFF1EB980),
+        onSurfaceVariant = Color(0xFF045D56),
+        secondary = Color(0xFF03DAC5)
+    )
+
+    private val LightColorPalette = lightColorScheme(
+        primary = Color(0xFF6200EE),
+        onSurfaceVariant = Color(0xFF3700B3),
+        secondary = Color(0xFF03DAC6)
+    )
+
+    val Typography = Typography (
+        bodySmall = androidx.compose.ui.text.TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
+        )
+    )
+
+    val Shapes = Shapes (
+        small = RoundedCornerShape(4.dp),
+        medium = RoundedCornerShape(4.dp),
+        large = RoundedCornerShape(0.dp)
+    )
+
+    @Composable
+    fun ProductDetailsTheme(
+        darkTheme: Boolean = isSystemInDarkTheme(),
+        content: @Composable () -> Unit
+    ) {
+        val colors = if (darkTheme) {
+            DarkColorPalette
+        } else {
+            LightColorPalette
+        }
+
+        MaterialTheme(
+            colorScheme = colors,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
+        )
     }
 
 }
