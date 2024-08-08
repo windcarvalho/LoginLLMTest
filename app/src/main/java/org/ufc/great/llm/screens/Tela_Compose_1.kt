@@ -1,17 +1,21 @@
 package org.ufc.great.llm.screens
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
@@ -21,100 +25,139 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.perfilgpt4llmtest.R
 
 class Tela_Compose_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProductDetailsTheme {
-                Surface(color = MaterialTheme.colorScheme.background) {
-                    ProductDetailScreen()
-                }
+            ProfileTheme {
+                ProfileScreen()
             }
         }
     }
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun ProductDetailScreen() {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = "Detalhes do Produto") }
-                )
-            },
-            content = {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
+    fun ProfileScreen() {
+        var name by remember { mutableStateOf("John") }
+        var surname by remember { mutableStateOf("Doe") }
+        var email by remember { mutableStateOf("john.doe@example.com") }
+        var phone by remember { mutableStateOf("123-456-7890") }
+        var profileImageUri by remember { mutableStateOf<Uri?>(null) }
+
+        val context = LocalContext.current
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(CircleShape)
+                    .clickable {
+                        // Implementar a lógica para selecionar uma nova foto de perfil
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                if (profileImageUri == null) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_launcher_background),
-                        contentDescription = "Imagem do Produto",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp),
+                        contentDescription = "Profile Image",
+                        modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "Nome do Produto",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+                } else {
+                    Image(
+                        painter = rememberAsyncImagePainter(profileImageUri),
+                        contentDescription = "Profile Image",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Descrição detalhada do produto. Este texto deve fornecer informações abrangentes sobre o produto, incluindo seus principais recursos e benefícios.",
-                        fontSize = 16.sp
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Preço: R$ 199,99",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Button(
-                            onClick = { /*TODO: Adicionar ao carrinho*/ },
-                            shape = RoundedCornerShape(50)
-                        ) {
-                            Text(text = "Adicionar ao Carrinho")
-                        }
-                        Button(
-                            onClick = { /*TODO: Adicionar aos favoritos*/ },
-                            shape = RoundedCornerShape(50),
-                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
-                        ) {
-                            Text(text = "Favoritar")
-                        }
-                    }
                 }
             }
-        )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text("Nome") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            OutlinedTextField(
+                value = surname,
+                onValueChange = { surname = it },
+                label = { Text("Sobrenome") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("E-mail") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            OutlinedTextField(
+                value = phone,
+                onValueChange = { phone = it },
+                label = { Text("Telefone") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Button(
+                    onClick = { /* Implementar a lógica de salvar */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                ) {
+                    Text("Salvar")
+                }
+
+                Button(
+                    onClick = { /* Implementar a lógica de edição */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+                ) {
+                    Text("Editar")
+                }
+            }
+        }
     }
 
 
     @Preview
     @Composable
     fun PreviewProductDetailScreen() {
-        ProductDetailScreen()
+        ProfileTheme {
+            ProfileScreen()
+        }
     }
 
     private val DarkColorPalette = darkColorScheme(
@@ -143,8 +186,9 @@ class Tela_Compose_1 : ComponentActivity() {
         large = RoundedCornerShape(0.dp)
     )
 
+
     @Composable
-    fun ProductDetailsTheme(
+    fun ProfileTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
         content: @Composable () -> Unit
     ) {
@@ -161,5 +205,4 @@ class Tela_Compose_1 : ComponentActivity() {
             content = content
         )
     }
-
 }
