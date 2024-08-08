@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -13,13 +17,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Shapes
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -30,6 +37,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 
@@ -37,103 +45,106 @@ class Tela_Compose_Access_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProductDetailsTheme {
-                // Chama a tela de detalhes do produto
-                ProductDetailScreen(
-                    productName = "Nome do Produto",
-                    productDescription = "Esta é uma descrição detalhada do produto. Ela deve ser informativa e envolvente, fornecendo todas as informações necessárias sobre o produto.",
-                    productPrice = "R$ 199,99",
-                    productImage = "https://via.placeholder.com/150"
-                )
+            ProfileAppTheme {
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    ProfileScreen()
+                }
             }
         }
     }
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun ProductDetailScreen(
-        productName: String,
-        productDescription: String,
-        productPrice: String,
-        productImage: String
-    ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = "Detalhes do Produto") },
-                    colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.primary)
-                )
-            },
-            content = {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
-                    Image(
-                        painter = rememberAsyncImagePainter(productImage),
-                        contentDescription = "Imagem do produto $productName",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .semantics { contentDescription = "Imagem do produto $productName" },
-                        contentScale = ContentScale.Crop
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = productName,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.semantics { contentDescription = "Nome do produto: $productName" }
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = productDescription,
-                        fontSize = 16.sp,
-                        modifier = Modifier.semantics { contentDescription = "Descrição do produto: $productDescription" }
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = productPrice,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Green,
-                        modifier = Modifier.semantics { contentDescription = "Preço do produto: $productPrice" }
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Button(
-                            onClick = { /* Ação para adicionar ao carrinho */ },
-                            modifier = Modifier
-                                .weight(1f)
-                                .semantics {
-                                    contentDescription = "Botão para adicionar ao carrinho"
-                                }
-                        ) {
-                            Text("Adicionar ao Carrinho")
-                        }
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Button(
-                            onClick = { /* Ação para adicionar aos favoritos */ },
-                            modifier = Modifier
-                                .weight(1f)
-                                .semantics {
-                                    contentDescription = "Botão para adicionar aos favoritos"
-                                },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB00020)) // Usar uma cor que tem contraste adequado
-                        ) {
-                            Text("Adicionar aos Favoritos")
-                        }
-                    }
-                }
+    fun ProfileScreen() {
+        var isEditing by remember { mutableStateOf(false) }
+        var profileImage by remember { mutableStateOf("https://via.placeholder.com/150") }
+        var name by remember { mutableStateOf(TextFieldValue("John Doe")) }
+        var surname by remember { mutableStateOf(TextFieldValue("Doe")) }
+        var email by remember { mutableStateOf(TextFieldValue("johndoe@example.com")) }
+        var phone by remember { mutableStateOf(TextFieldValue("123-456-7890")) }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+            ProfileImage(profileImage) {
+                // Código para atualizar a imagem de perfil
             }
-        )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            if (isEditing) {
+                EditableProfileField("Nome", name) { name = it }
+                EditableProfileField("Sobrenome", surname) { surname = it }
+                EditableProfileField("E-mail", email) { email = it }
+                EditableProfileField("Telefone", phone) { phone = it }
+            } else {
+                ProfileField("Nome", name.text)
+                ProfileField("Sobrenome", surname.text)
+                ProfileField("E-mail", email.text)
+                ProfileField("Telefone", phone.text)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = {
+                    isEditing = !isEditing
+                    // Adicionar lógica para salvar alterações quando isEditing for false
+                },
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = if (isEditing) "Salvar alterações" else "Editar perfil"
+                    }
+            ) {
+                Text(if (isEditing) "Salvar" else "Editar")
+            }
+        }
     }
+
+    @Composable
+    fun ProfileImage(profileImageUrl: String, onClick: () -> Unit) {
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color.Gray, shape = CircleShape)
+                .clickable(onClick = onClick)
+                .semantics { contentDescription = "Imagem de perfil, clique para mudar" },
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = rememberAsyncImagePainter(profileImageUrl),
+                contentDescription = "Imagem de perfil",
+                modifier = Modifier.size(100.dp),
+                contentScale = ContentScale.Crop
+            )
+        }
+    }
+
+    @Composable
+    fun ProfileField(label: String, value: String) {
+        Column(modifier = Modifier.padding(8.dp)) {
+            Text(label, fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
+            Text(value, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
+        }
+    }
+
+    @Composable
+    fun EditableProfileField(label: String, value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
+        Column(modifier = Modifier.padding(8.dp)) {
+            Text(label, fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
+            TextField(
+                value = value,
+                onValueChange = onValueChange,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .semantics { contentDescription = "Campo de $label" }
+            )
+        }
+    }
+
 
     private val DarkColorPalette = darkColorScheme(
         primary = Color(0xFF1EB980),
@@ -162,8 +173,15 @@ class Tela_Compose_Access_2 : AppCompatActivity() {
     )
 
     @Composable
-    fun ProductDetailsTheme(content: @Composable () -> Unit) {
-        val colors = LightColorPalette
+    fun ProfileAppTheme(
+        darkTheme: Boolean = isSystemInDarkTheme(),
+        content: @Composable () -> Unit
+    ) {
+        val colors = if (darkTheme) {
+            DarkColorPalette
+        } else {
+            LightColorPalette
+        }
 
         MaterialTheme(
             colorScheme = colors,
