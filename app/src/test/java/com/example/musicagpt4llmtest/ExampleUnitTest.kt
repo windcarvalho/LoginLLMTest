@@ -1,4 +1,4 @@
-package com.example.perfilgpt4llmtest
+package com.example.musicagpt4llmtest
 
 import org.junit.Test
 

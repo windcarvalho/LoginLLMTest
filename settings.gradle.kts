@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PerfilGPT4LLMTest"
+rootProject.name = "MusicaGPT4LLMTest"
 include(":app")

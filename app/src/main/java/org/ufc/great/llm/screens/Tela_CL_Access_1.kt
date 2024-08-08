@@ -2,7 +2,7 @@ package org.ufc.great.llm.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.perfilgpt4llmtest.R
+import com.example.musicagpt4llmtest.R
 
 class Tela_CL_Access_1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

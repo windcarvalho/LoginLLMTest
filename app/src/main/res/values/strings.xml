@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PerfilGPT4LLMTest</string>
+    <string name="app_name">MusicaGPT4LLMTest</string>
     <string name="title_activity_tela_login1">Tela_Produto1</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

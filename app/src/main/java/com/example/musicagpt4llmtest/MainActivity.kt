@@ -1,4 +1,4 @@
-package com.example.perfilgpt4llmtest
+package com.example.musicagpt4llmtest
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

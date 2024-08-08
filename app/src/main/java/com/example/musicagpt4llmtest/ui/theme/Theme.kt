@@ -1,4 +1,4 @@
-package com.example.perfilgpt4llmtest.ui.theme
+package com.example.musicagpt4llmtest.ui.theme
 
 import android.app.Activity
 import android.os.Build
