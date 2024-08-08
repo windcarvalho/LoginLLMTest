@@ -1,4 +1,4 @@
-package com.example.produtollmtest
+package com.example.produtogpt4llmtest
 
 import org.junit.Test
 

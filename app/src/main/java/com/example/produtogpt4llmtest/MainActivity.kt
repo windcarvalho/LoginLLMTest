@@ -1,4 +1,4 @@
-package com.example.produtollmtest
+package com.example.produtogpt4llmtest
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

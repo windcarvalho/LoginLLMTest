@@ -105,7 +105,7 @@
             android:theme="@style/Theme.LoginLLMTest" >
         </activity>
         <activity
-            android:name="com.example.produtollmtest.MainActivity"
+            android:name="com.example.produtogpt4llmtest.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.LoginLLMTest" >

@@ -1,4 +1,4 @@
-package com.example.produtollmtest.ui.theme
+package com.example.produtogpt4llmtest.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

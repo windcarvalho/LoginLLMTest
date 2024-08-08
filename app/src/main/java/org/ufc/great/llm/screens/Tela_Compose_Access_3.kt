@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
-import com.example.produtollmtest.R
+import com.example.produtogpt4llmtest.R
 
 class Tela_Compose_Access_3<VisualTransformation> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -15,7 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.produtollmtest.R
+import com.example.produtogpt4llmtest.R
 
 class Tela_Compose_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
