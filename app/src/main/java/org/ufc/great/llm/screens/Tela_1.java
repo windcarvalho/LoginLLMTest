@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.produtogpt4llmtest.R;
+import com.example.perfilgpt4llmtest.R;
 
 public class Tela_1 extends AppCompatActivity {
 

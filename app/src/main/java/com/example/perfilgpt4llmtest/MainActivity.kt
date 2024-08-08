@@ -1,4 +1,4 @@
-package com.example.produtogpt4llmtest
+package com.example.perfilgpt4llmtest
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

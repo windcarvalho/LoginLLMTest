@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.produtogpt4llmtest"
+    namespace = "com.example.perfilgpt4llmtest"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.produtogpt4llmtest"
+        applicationId = "com.example.perfilgpt4llmtest"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
