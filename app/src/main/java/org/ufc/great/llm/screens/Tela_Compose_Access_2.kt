@@ -11,9 +11,17 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Shapes
@@ -25,6 +33,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +41,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.TextButton
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -45,103 +56,132 @@ class Tela_Compose_Access_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProfileAppTheme {
+            MusicPlayerTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    ProfileScreen()
+                    MusicPlayerScreen()
                 }
             }
         }
     }
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun ProfileScreen() {
-        var isEditing by remember { mutableStateOf(false) }
-        var profileImage by remember { mutableStateOf("https://via.placeholder.com/150") }
-        var name by remember { mutableStateOf(TextFieldValue("John Doe")) }
-        var surname by remember { mutableStateOf(TextFieldValue("Doe")) }
-        var email by remember { mutableStateOf(TextFieldValue("johndoe@example.com")) }
-        var phone by remember { mutableStateOf(TextFieldValue("123-456-7890")) }
+    fun MusicPlayerScreen() {
+        val scope = rememberCoroutineScope()
+        
 
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Music Player") },
+                    colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.primary)
+                )
+            },
+            content = {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    MusicPlayerControls()
+                }
+            }
+        )
+    }
+
+    @Composable
+    fun MusicPlayerControls() {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ProfileImage(profileImage) {
-                // Código para atualizar a imagem de perfil
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            if (isEditing) {
-                EditableProfileField("Nome", name) { name = it }
-                EditableProfileField("Sobrenome", surname) { surname = it }
-                EditableProfileField("E-mail", email) { email = it }
-                EditableProfileField("Telefone", phone) { phone = it }
-            } else {
-                ProfileField("Nome", name.text)
-                ProfileField("Sobrenome", surname.text)
-                ProfileField("E-mail", email.text)
-                ProfileField("Telefone", phone.text)
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = {
-                    isEditing = !isEditing
-                    // Adicionar lógica para salvar alterações quando isEditing for false
-                },
-                modifier = Modifier
-                    .semantics {
-                        contentDescription = if (isEditing) "Salvar alterações" else "Editar perfil"
-                    }
-            ) {
-                Text(if (isEditing) "Salvar" else "Editar")
-            }
-        }
-    }
-
-    @Composable
-    fun ProfileImage(profileImageUrl: String, onClick: () -> Unit) {
-        Box(
-            modifier = Modifier
-                .size(100.dp)
-                .background(Color.Gray, shape = CircleShape)
-                .clickable(onClick = onClick)
-                .semantics { contentDescription = "Imagem de perfil, clique para mudar" },
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = rememberAsyncImagePainter(profileImageUrl),
-                contentDescription = "Imagem de perfil",
-                modifier = Modifier.size(100.dp),
-                contentScale = ContentScale.Crop
+            BasicText(
+                text = "Now Playing: Song Title - Artist",
+                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                modifier = Modifier.semantics { contentDescription = "Now Playing: Song Title by Artist" }
             )
-        }
-    }
+            Spacer(modifier = Modifier.height(16.dp))
 
-    @Composable
-    fun ProfileField(label: String, value: String) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(label, fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
-            Text(value, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
-        }
-    }
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                IconButton(
+                    onClick = { /* TODO: Handle rewind */ },
+                    modifier = Modifier.semantics { contentDescription = "Rewind" }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = null,
+                        tint = LocalContentColor.current.copy(alpha = LocalContentColor.current.alpha)
+                    )
+                }
+                IconButton(
+                    onClick = { /* TODO: Handle play/pause */ },
+                    modifier = Modifier.semantics { contentDescription = "Play/Pause" }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.PlayArrow,
+                        contentDescription = null,
+                        tint = LocalContentColor.current.copy(alpha = LocalContentColor.current.alpha)
+                    )
+                }
+                IconButton(
+                    onClick = { /* TODO: Handle forward */ },
+                    modifier = Modifier.semantics { contentDescription = "Forward" }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = null,
+                        tint = LocalContentColor.current.copy(alpha = LocalContentColor.current.alpha)
+                    )
+                }
+            }
 
-    @Composable
-    fun EditableProfileField(label: String, value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(label, fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
-            TextField(
-                value = value,
-                onValueChange = onValueChange,
+            Spacer(modifier = Modifier.height(16.dp))
+
+            LinearProgressIndicator(
+                progress = 0.5f,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .semantics { contentDescription = "Campo de $label" }
+                    .semantics { contentDescription = "Progress bar showing 50% completion" }
             )
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Playlist()
+        }
+    }
+
+    @Composable
+    fun Playlist() {
+        Column(
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            BasicText(
+                text = "Playlist",
+                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                modifier = Modifier.semantics { contentDescription = "Playlist" }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Simulate a playlist with static items
+            val playlist = listOf("Song 1", "Song 2", "Song 3", "Song 4")
+
+            for (song in playlist) {
+                TextButton(
+                    onClick = { /* TODO: Handle song selection */ },
+                    modifier = Modifier.semantics { contentDescription = "Song: $song" }
+                ) {
+                    Text(
+                        text = song,
+                        style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium)
+                    )
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+            }
         }
     }
 
@@ -173,7 +213,7 @@ class Tela_Compose_Access_2 : AppCompatActivity() {
     )
 
     @Composable
-    fun ProfileAppTheme(
+    fun MusicPlayerTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
         content: @Composable () -> Unit
     ) {

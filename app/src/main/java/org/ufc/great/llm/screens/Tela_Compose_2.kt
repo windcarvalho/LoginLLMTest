@@ -11,22 +11,33 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -43,107 +54,114 @@ class Tela_Compose_2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProfileAppTheme {
+            MusicPlayerTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    ProfileScreen()
+                    MusicPlayerScreen()
                 }
             }
         }
     }
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun ProfileScreen() {
-        var isEditing by remember { mutableStateOf(false) }
-        var profileImage by remember { mutableStateOf("https://via.placeholder.com/150") }
-        var name by remember { mutableStateOf(TextFieldValue("John Doe")) }
-        var surname by remember { mutableStateOf(TextFieldValue("Doe")) }
-        var email by remember { mutableStateOf(TextFieldValue("johndoe@example.com")) }
-        var phone by remember { mutableStateOf(TextFieldValue("123-456-7890")) }
+    fun MusicPlayerScreen() {
+        val scope = rememberCoroutineScope()
+        val scaffoldState = rememberDrawerState(DrawerValue.Closed)
 
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Music Player") },
+                    colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.primary)
+                )
+            },
+            content = {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    MusicPlayerControls()
+                }
+            }
+        )
+    }
+
+    @Composable
+    fun MusicPlayerControls() {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ProfileImage(profileImage) {
-                // Código para atualizar a imagem de perfil
-            }
-
+            BasicText(text = "Now Playing: Song Title - Artist", style = MaterialTheme.typography.titleSmall)
             Spacer(modifier = Modifier.height(16.dp))
 
-            if (isEditing) {
-                EditableProfileField("Nome", name) { name = it }
-                EditableProfileField("Sobrenome", surname) { surname = it }
-                EditableProfileField("E-mail", email) { email = it }
-                EditableProfileField("Telefone", phone) { phone = it }
-            } else {
-                ProfileField("Nome", name.text)
-                ProfileField("Sobrenome", surname.text)
-                ProfileField("E-mail", email.text)
-                ProfileField("Telefone", phone.text)
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = {
-                    isEditing = !isEditing
-                    // Adicionar lógica para salvar alterações quando isEditing for false
-                }
-            ) {
-                Text(if (isEditing) "Salvar" else "Editar")
-            }
-        }
-    }
-
-    @Composable
-    fun ProfileImage(profileImageUrl: String, onClick: () -> Unit) {
-        Box(
-            modifier = Modifier
-                .size(100.dp)
-                .background(Color.Gray, shape = CircleShape)
-                .clickable { onClick() },
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = rememberAsyncImagePainter(profileImageUrl),
-                contentDescription = null,
-                modifier = Modifier.size(100.dp),
-                contentScale = ContentScale.Crop
-            )
-        }
-    }
-
-    @Composable
-    fun ProfileField(label: String, value: String) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(label, fontSize = 12.sp, color = Color.Gray)
-            Text(value, fontSize = 16.sp)
-        }
-    }
-
-    @Composable
-    fun EditableProfileField(label: String, value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(label, fontSize = 12.sp, color = Color.Gray)
-            TextField(
-                value = value,
-                onValueChange = onValueChange,
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.fillMaxWidth()
-            )
+            ) {
+                IconButton(onClick = { /* TODO: Handle rewind */ }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Rewind",
+                        tint = Color.Gray
+                    )
+                }
+                IconButton(onClick = { /* TODO: Handle play/pause */ }) {
+                    Icon(
+                        imageVector = Icons.Default.PlayArrow,
+                        contentDescription = "Play/Pause",
+                        tint = Color.Gray
+                    )
+                }
+                IconButton(onClick = { /* TODO: Handle forward */ }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = "Forward",
+                        tint = Color.Gray
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            LinearProgressIndicator(progress = 0.5f, modifier = Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Playlist()
         }
     }
 
+    @Composable
+    fun Playlist() {
+        Column(
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            BasicText(text = "Playlist", style = MaterialTheme.typography.titleSmall)
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Simulate a playlist with static items
+            val playlist = listOf("Song 1", "Song 2", "Song 3", "Song 4")
+
+            for (song in playlist) {
+                TextButton(onClick = { /* TODO: Handle song selection */ }) {
+                    Text(text = song, style = MaterialTheme.typography.bodySmall)
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+        }
+    }
 
 
     @Preview
     @Composable
     fun PreviewProductDetailScreen() {
-        ProfileAppTheme {
+        MusicPlayerTheme {
             Surface(color = MaterialTheme.colorScheme.background) {
-                ProfileScreen()
+                MusicPlayerScreen()
             }
         }
     }
@@ -160,11 +178,17 @@ class Tela_Compose_2 : AppCompatActivity() {
         secondary = Color(0xFF03DAC6)
     )
 
+
     val Typography = Typography(
         bodySmall = androidx.compose.ui.text.TextStyle(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp
+        ),
+        titleSmall = androidx.compose.ui.text.TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Medium,
+            fontSize = 20.sp
         )
     )
 
@@ -175,7 +199,7 @@ class Tela_Compose_2 : AppCompatActivity() {
     )
 
     @Composable
-    fun ProfileAppTheme(
+    fun MusicPlayerTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
         content: @Composable () -> Unit
     ) {
