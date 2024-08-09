@@ -3,10 +3,12 @@ package org.ufc.great.llm.screens
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -16,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
@@ -24,6 +27,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -33,93 +37,170 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.musicagpt4llmtest.R
 
 class Tela_Compose_3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProfileTheme {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    ProfileScreen()
+            MusicPlayerTheme {
+                val musicViewModel by viewModels<MusicViewModel>()
+                MusicPlayerScreen(musicViewModel)
+            }
+        }
+    }
+
+    @Composable
+    fun MusicPlayerScreen(viewModel: MusicViewModel) {
+        val currentSong by viewModel.currentSong.observeAsState()
+        val isPlaying by viewModel.isPlaying.observeAsState(false)
+        val songList by viewModel.songList.observeAsState(emptyList())
+
+        MusicPlayerTheme {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                currentSong?.let { song ->
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Image(
+                            painter = painterResource(id = song.albumArtRes),
+                            contentDescription = "Album Art",
+                            modifier = Modifier
+                                .size(200.dp)
+                                .padding(16.dp)
+                        )
+                        Text(
+                            text = song.title,
+                            style = MaterialTheme.typography.titleMedium,
+                            textAlign = TextAlign.Center
+                        )
+                        Text(
+                            text = song.artist,
+                            style = MaterialTheme.typography.labelSmall,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    IconButton(onClick = { viewModel.onPrevious() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_launcher_background),
+                            contentDescription = "Previous"
+                        )
+                    }
+                    IconButton(onClick = { viewModel.onPlayPause() }) {
+                        Icon(
+                            painter = painterResource(id = if (isPlaying) R.drawable.ic_launcher_background else R.drawable.ic_launcher_background),
+                            contentDescription = "Play/Pause"
+                        )
+                    }
+                    IconButton(onClick = { viewModel.onNext() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_launcher_background),
+                            contentDescription = "Next"
+                        )
+                    }
+                }
+
+                LinearProgressIndicator(
+                    progress = viewModel.playbackProgress.observeAsState(0f).value,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Text(text = "Playlist", style = MaterialTheme.typography.titleSmall)
+                LazyColumn {
+                    items(songList.size) { index ->
+                        val song = songList[index]
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { viewModel.onSelectSong(index) }
+                                .padding(8.dp)
+                        ) {
+                            Text(text = song.title, modifier = Modifier.weight(1f))
+                            Text(text = song.artist, textAlign = TextAlign.End)
+                        }
+                    }
                 }
             }
         }
     }
 
-    @Composable
-    fun ProfileScreen() {
-        var name by remember { mutableStateOf(TextFieldValue("John")) }
-        var surname by remember { mutableStateOf(TextFieldValue("Doe")) }
-        var email by remember { mutableStateOf(TextFieldValue("john.doe@example.com")) }
-        var phone by remember { mutableStateOf(TextFieldValue("+1234567890")) }
-        var isEditing by remember { mutableStateOf(false) }
+    data class Song(
+        val title: String,
+        val artist: String,
+        val albumArtRes: Int
+    )
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            ProfileImage()
+    class MusicRepository {
+        fun getSongs(): List<Song> {
+            return listOf(
+                Song("Song 1", "Artist 1", R.drawable.ic_launcher_background),
+                Song("Song 2", "Artist 2", R.drawable.ic_launcher_background),
+                Song("Song 3", "Artist 3", R.drawable.ic_launcher_background)
+            )
+        }
+    }
 
-            Spacer(modifier = Modifier.height(16.dp))
+    class MusicViewModel : ViewModel() {
+        private val repository = MusicRepository()
 
-            if (isEditing) {
-                EditableProfileField(value = name, onValueChange = { name = it }, label = "Name")
-                EditableProfileField(value = surname, onValueChange = { surname = it }, label = "Surname")
-                EditableProfileField(value = email, onValueChange = { email = it }, label = "Email")
-                EditableProfileField(value = phone, onValueChange = { phone = it }, label = "Phone")
-            } else {
-                ProfileField(value = name.text, label = "Name")
-                ProfileField(value = surname.text, label = "Surname")
-                ProfileField(value = email.text, label = "Email")
-                ProfileField(value = phone.text, label = "Phone")
-            }
+        private val _currentSong = MutableLiveData<Song?>()
+        val currentSong: LiveData<Song?> = _currentSong
 
-            Spacer(modifier = Modifier.height(16.dp))
+        private val _isPlaying = MutableLiveData<Boolean>(false)
+        val isPlaying: LiveData<Boolean> = _isPlaying
 
-            Row {
-                IconButton(onClick = { isEditing = !isEditing }) {
-                    Icon(
-                        imageVector = if (isEditing) Icons.Default.Done else Icons.Default.Edit,
-                        contentDescription = if (isEditing) "Save" else "Edit"
-                    )
+        private val _playbackProgress = MutableLiveData<Float>(0f)
+        val playbackProgress: LiveData<Float> = _playbackProgress
+
+        private val _songList = MutableLiveData<List<Song>>(repository.getSongs())
+        val songList: LiveData<List<Song>> = _songList
+
+        init {
+            _currentSong.value = _songList.value?.firstOrNull()
+        }
+
+        fun onPlayPause() {
+            _isPlaying.value = !_isPlaying.value!!
+        }
+
+        fun onPrevious() {
+            _songList.value?.let { songs ->
+                val currentIndex = songs.indexOf(_currentSong.value)
+                if (currentIndex > 0) {
+                    _currentSong.value = songs[currentIndex - 1]
                 }
             }
         }
-    }
 
-    @Composable
-    fun ProfileImage() {
-        val painter = painterResource(id = R.drawable.ic_launcher_background)
-        Image(
-            painter = painter,
-            contentDescription = "Profile Image",
-            modifier = Modifier
-                .size(128.dp)
-                .clip(CircleShape)
-                .clickable { /* Handle image click to update profile picture */ },
-            contentScale = ContentScale.Crop
-        )
-    }
-
-    @Composable
-    fun ProfileField(value: String, label: String) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-            Text(text = value, style = MaterialTheme.typography.bodySmall)
+        fun onNext() {
+            _songList.value?.let { songs ->
+                val currentIndex = songs.indexOf(_currentSong.value)
+                if (currentIndex < songs.size - 1) {
+                    _currentSong.value = songs[currentIndex + 1]
+                }
+            }
         }
-    }
 
-    @Composable
-    fun EditableProfileField(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit, label: String) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-            TextField(value = value, onValueChange = onValueChange)
+        fun onSelectSong(index: Int) {
+            _songList.value?.let { songs ->
+                _currentSong.value = songs[index]
+            }
         }
     }
 
@@ -128,11 +209,7 @@ class Tela_Compose_3 : AppCompatActivity() {
     @Preview(showBackground = true)
     @Composable
     fun PreviewProductDetailScreen() {
-        ProfileTheme {
-            Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                ProfileScreen()
-            }
-        }
+
     }
 
     private val DarkColorPalette = darkColorScheme(
@@ -162,7 +239,7 @@ class Tela_Compose_3 : AppCompatActivity() {
     )
 
     @Composable
-    fun ProfileTheme(
+    fun MusicPlayerTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
         content: @Composable () -> Unit
     ) {
