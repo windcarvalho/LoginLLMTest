@@ -8,13 +8,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Shapes
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
@@ -39,123 +47,109 @@ class Tela_Compose_Access_1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProfileTheme {
-                ProfileScreen()
+            MusicPlayerTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MusicPlayerScreen()
+                }
             }
         }
     }
 
     @Composable
-    fun ProfileScreen() {
-        var name by remember { mutableStateOf("John") }
-        var surname by remember { mutableStateOf("Doe") }
-        var email by remember { mutableStateOf("john.doe@example.com") }
-        var phone by remember { mutableStateOf("123-456-7890") }
-        var profileImageUri by remember { mutableStateOf<Uri?>(null) }
+    fun MusicPlayerScreen() {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Column {
+                MusicInfo()
+                MusicControls()
+                Playlist()
+            }
+        }
+    }
 
-        val context = LocalContext.current
+    @Composable
+    fun MusicControls() {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Button(
+                onClick = { /* TODO: Handle previous */ },
+                modifier = Modifier.size(48.dp) // Tamanho de toque adequado
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Previous song"
+                )
+            }
+            Button(
+                onClick = { /* TODO: Handle play/pause */ },
+                modifier = Modifier.size(48.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.PlayArrow,
+                    contentDescription = "Play song"
+                )
+            }
+            Button(
+                onClick = { /* TODO: Handle next */ },
+                modifier = Modifier.size(48.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                    contentDescription = "Next song"
+                )
+            }
+        }
+    }
 
+    @Composable
+    fun MusicInfo() {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(100.dp)
-                    .clip(CircleShape)
-                    .clickable {
-                        // Implementar a lógica para selecionar uma nova foto de perfil
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                if (profileImageUri == null) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
-                        contentDescription = "Imagem de Perfil Padrão",
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-                } else {
-                    Image(
-                        painter = rememberAsyncImagePainter(profileImageUri),
-                        contentDescription = "Imagem de Perfil",
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Nome") },
-                modifier = Modifier
-                    .fillMaxWidth()
+            Text(
+                text = "Song Title",
+                style = MaterialTheme.typography.headlineMedium.copy(fontSize = 20.sp, color = Color.Black)
             )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OutlinedTextField(
-                value = surname,
-                onValueChange = { surname = it },
-                label = { Text("Sobrenome") },
-                modifier = Modifier
-                    .fillMaxWidth()
+            Text(
+                text = "Artist Name",
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp, color = Color.Gray)
             )
+        }
+    }
 
-            Spacer(modifier = Modifier.height(8.dp))
+    @Composable
+    fun Playlist() {
+        val songs = listOf("Song 1", "Song 2", "Song 3") // Example songs
 
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("E-mail") },
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OutlinedTextField(
-                value = phone,
-                onValueChange = { phone = it },
-                label = { Text("Telefone") },
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Button(
-                    onClick = { /* Implementar a lógica de salvar */ },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+        LazyColumn {
+            items(songs) { song ->
+                Column(
+                    modifier = Modifier.padding(8.dp)
                 ) {
-                    Text("Salvar")
-                }
-
-                Button(
-                    onClick = { /* Implementar a lógica de edição */ },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
-                ) {
-                    Text("Editar")
+                    Text(
+                        text = song,
+                        color = Color.Black // Garantir contraste adequado
+                    )
                 }
             }
         }
     }
+
 
     @Preview
     @Composable
     fun PreviewProductDetailScreen() {
-        ProfileTheme {
-            ProfileScreen()
-        }
+
     }
 
     private val DarkColorPalette = darkColorScheme(
@@ -186,7 +180,7 @@ class Tela_Compose_Access_1 : ComponentActivity() {
 
 
     @Composable
-    fun ProfileTheme(
+    fun MusicPlayerTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
         content: @Composable () -> Unit
     ) {
